@@ -10,9 +10,121 @@ import { White, Black, _Yellow, lightGrey } from '../../Colors';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Container, Icon } from 'native-base';
 import _Button from '../../Component/_Button';
+import { Modalize } from 'react-native-modalize';
+import _BottomSheet from '../../Component/_bottomSheet';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
 export default class Account extends Component{
+    loginSheet = React.createRef();
+    signUpSheet = React.createRef();
+    constructor(props){
+        super(props)
+        this.state={
+            showBottomSheet:false,
+            showSignUpSheet:false,
+        }
+    }
+    _navigateTo=(routeName)=>{
+    this.props.navigation.navigate(routeName)
+    }
+    callLoginSheet=()=>{
+        const loginSheet = this.loginSheet.current;
+        if(loginSheet){
+            this.setState({showBottomSheet:true})
+            loginSheet.open()
+        }
+    }
+    callSignUpSheet=()=>{
+        const signUpSheet = this.signUpSheet.current;
+        if(signUpSheet){
+            this.setState({showSignUpSheet:true})
+            signUpSheet.open()
+        }
+    }
+    changeSheet=(sheet)=>{
+        if(sheet==='signUp'){
+        const signUpSheet = this.signUpSheet.current;
+        this.setState({showBottomSheet:false})
+        if(this.loginSheet.current){
+            this.loginSheet.current.close()
+            if(signUpSheet){
+                this.setState({showSignUpSheet:true})
+                signUpSheet.open()
+            }
+        }
+    }
+    if(sheet==='login'){
+        const loginSheet = this.loginSheet.current;
+        this.setState({showSignUpSheet:false})
+        if(this.signUpSheet.current){
+            this.signUpSheet.current.close()
+            if(loginSheet){
+                this.setState({showBottomSheet:true})
+                loginSheet.open()
+            }
+        }
+    }
+   
+    }
+    // callLoginSheet=()=>{
+    //     const loginSheet = this.loginSheet.current;
+    //     this.setState({showSignUpSheet:false})
+    //     if(this.signUpSheet.current){
+    //         this.signUpSheet.current.close()
+    //         if(loginSheet){
+    //             this.setState({showBottomSheet:true})
+    //             loginSheet.open()
+    //         }
+    //     }
+    // }
+    renderBottomSheet=()=>{
+        return(
+           <_BottomSheet
+           logInWithFB={()=>this._navigateTo('Login')}
+           logInWithGmail={()=>this._navigateTo('Login')}
+           logInWithEmail={()=>this._navigateTo('Login')}
+           changeSheet={()=>this.changeSheet('signUp')}
+           firstIconName={'facebook-official'}
+           firstIconType={'FontAwesome'}
+           firstButtonHeading={'Log in facebook'}
+           secondIconName={'logo-google'}
+           secondIconType={'Ionicons'}
+           secondButtonHeading={'Log in with gmail'}
+           thirdIconName={'email'}
+           thirdIconType={'Entypo'}
+           thirdButtonHeading={'Log in with email'}
+           forthButtonHeading={'Sign up'}
+           Heading={'Good to see you again!'}
+           subHeading={'Access your lesson schedule, send messages and book lessons'}
+           />
+        )
+    }
+    renderSignUpSheet=()=>{
+        return(
+            <_BottomSheet
+            sigUp={true}
+            logInWithFB={()=>this._navigateTo('SignUp')}
+            logInWithGmail={()=>this._navigateTo('SignUp')}
+            logInWithEmail={()=>this._navigateTo('SignUp')}
+            changeSheet={()=>this.changeSheet('login')}
+            firstIconName={'facebook-official'}
+            firstIconType={'FontAwesome'}
+            firstButtonHeading={'Sign up with facebook'}
+            secondIconName={'logo-google'}
+            secondIconType={'Ionicons'}
+            secondButtonHeading={'Sign up with gmail'}
+            thirdIconName={'email'}
+            thirdIconType={'Entypo'}
+            thirdButtonHeading={'Sign up with email'}
+            forthButtonHeading={'Login'}
+            Heading={'Sign up to start learning'}
+            subHeading={'create an account to message tutors and book lessons'}
+            />
+         )
+    }
+    
+
     render(){
         return(
             <Container style={styles.container}>
@@ -24,12 +136,14 @@ export default class Account extends Component{
                <View style={styles.content}>
                 <View style={{flexDirection:'row'}}>
                 <_Button
+                onPress={()=>this.callLoginSheet()}
                 styles={{width: screenWidth*0.35,}}
                 textStyle={{fontSize:RFValue(12),color:Black}}
                 IconNmae={'login'}
                 textButton={'Login'}
                 />
                 <_Button
+                 onPress={()=>this.callSignUpSheet()}
                 styles={{width: screenWidth*0.35,}}
                 textStyle={{fontSize:RFValue(12),color:Black}}
                 IconNmae={'account'}
@@ -106,6 +220,18 @@ export default class Account extends Component{
                    
                 </View>
                </View>
+               <Modalize
+               adjustToContentHeight
+               ref={this.loginSheet}
+               onClosed = {this.onClosed}>
+                {this.renderBottomSheet()}   
+                </Modalize>
+                <Modalize
+               adjustToContentHeight
+               ref={this.signUpSheet}
+               onClosed = {this.onClosed}>
+                {this.renderSignUpSheet()}   
+                </Modalize>
             </Container>
         )
     }
