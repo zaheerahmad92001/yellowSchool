@@ -13,6 +13,7 @@ import _Button from '../../Component/_Button';
 import { Modalize } from 'react-native-modalize';
 import _BottomSheet from '../../Component/_bottomSheet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import _BottomNavigation from '../../Component/bottomNavigation';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
 export default class Account extends Component{
@@ -23,6 +24,11 @@ export default class Account extends Component{
         this.state={
             showBottomSheet:false,
             showSignUpSheet:false,
+            changeSearchIconColor:false,
+            changeMessageIconColor:false,
+            changeUserIconColor:false,
+            changeSettingIconColor:false
+
         }
     }
     _navigateTo=(routeName)=>{
@@ -123,8 +129,39 @@ export default class Account extends Component{
             />
          )
     }
-    
-
+    _Search=()=>{
+        
+        this.setState({
+           changeSearchIconColor:true,
+           changeMessageIconColor:false,
+           changeUserIconColor:false,
+           changeSettingIconColor:false
+        })
+    }
+    _MessageClick=()=>{
+        this.setState({
+            changeSearchIconColor:false,
+            changeMessageIconColor:true,
+            changeUserIconColor:false,
+            changeSettingIconColor:false
+         })
+    }
+    _UserClick=()=>{
+        this.setState({
+            changeSearchIconColor:false,
+            changeMessageIconColor:false,
+            changeUserIconColor:true,
+            changeSettingIconColor:false
+         })
+    }
+    _SettingClick=()=>{
+        this.setState({
+            changeSearchIconColor:false,
+            changeMessageIconColor:false,
+            changeUserIconColor:false,
+            changeSettingIconColor:true
+         })
+    }
     render(){
         return(
             <Container style={styles.container}>
@@ -190,7 +227,17 @@ export default class Account extends Component{
                  <View style={[styles.bottomBorder]}></View> 
                   <Text style={styles.versionText}>Version 13.9</Text>
                 </View>
-                <View style={styles.BottomNavigation}>
+                <_BottomNavigation
+                SearchClick={()=>this._Search()}
+                changeSearchIconColor={this.state.changeSearchIconColor}
+                MessageClick={()=>this._MessageClick()}
+                changeMessageIconColor={this.state.changeMessageIconColor}
+                UserClick={()=>this._UserClick()}
+                changeUserIconColor={this.state.changeUserIconColor}
+                SettingClick={()=>this._SettingClick()}
+                changeSettingIconColor={this.state.changeSettingIconColor}
+                />
+                {/* <View style={styles.BottomNavigation}>
                    <View style={{flex:1.5, flexDirection:'row',justifyContent:'space-evenly',alignItems:"center"}}>
                        <Icon
                        name={'ios-search'}
@@ -218,7 +265,7 @@ export default class Account extends Component{
                        <Icon/>
                        </View>
                    
-                </View>
+                </View> */}
                </View>
                <Modalize
                adjustToContentHeight
