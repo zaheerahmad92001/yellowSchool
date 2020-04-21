@@ -9,13 +9,19 @@ import SignUp from '../../src/Container/AuthFlow/SignUp';
 import ForgetPassword from '../../src/Container/AuthFlow/Forgetpassword';
 import appLanguage from '../../src/Container/AppLanguages';
 import SearchView from '../Container/Search';
+import MessageIntroView from '../Container/MessageIntroView';
+import LessonIntroView from '../Container/LessonIntroView';
+import SingleTutor from '../Container/SingleTutor';
 
 
 const Stack = createStackNavigator();
 
     function MyStack() {
       return (
-        <Stack.Navigator initialRouteName="SearchView"headerMode="none" >
+        <Stack.Navigator initialRouteName="SingleTutor"headerMode="none">
+          <Stack.Screen name ='SingleTutor' component={SingleTutor}/>
+          <Stack.Screen name ='LessonIntroView' component={LessonIntroView}/>
+           <Stack.Screen name ='MessageIntroView' component={MessageIntroView}/>
            <Stack.Screen name ='_AppInfo' component={_AppInfo}/>
            <Stack.Screen name ='SearchView' component ={SearchView}/>
            <Stack.Screen name ='splash' component={Splash}/>

@@ -22,11 +22,11 @@ return(
      name={props.leftIcon}
      type={'MaterialIcons'}
      style={[styles._leftIconStyle,props.leftIconStyle]}
+     onPress={props.leftIconPress}
      />
       <TouchableOpacity
-      onPress={props.leftPress}
-      >
-<Text style={[styles.leftSideText,props.leftTextStyle]}>{props.leftText}</Text>
+      onPress={props.leftPress} >
+     <Text style={[styles.leftSideText,props.leftTextStyle]}>{props.leftText}</Text>
      </TouchableOpacity>
  </View>
 

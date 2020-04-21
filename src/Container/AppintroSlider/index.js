@@ -16,7 +16,8 @@ const slides = [
       text2:'tutors and native speakers',
       account:'Have an account ? login',
       buttonText:'Get started',
-     // image: require('./assets/1.jpg'),
+      navigateTo:'',
+      // image: require('./assets/1.jpg'),
       backgroundColor: '#59b2ab',
     },
     {
@@ -26,6 +27,7 @@ const slides = [
       text2:'to chose the perfect tutor',
       account:'Have an account ? login',
       buttonText:'Get started',
+      navigateTo:'',
       //image: require('./assets/2.jpg'),
       backgroundColor: '#febe29',
     },
@@ -36,6 +38,7 @@ const slides = [
       text2:'notifications about your lessons',
       account:'Have an account ? login',
       buttonText:'Get started',
+      navigateTo:'',
       //image: require('./assets/3.jpg'),
       backgroundColor: '#22bcb5',
     }
@@ -64,6 +67,7 @@ export default class _AppInfo extends Component{
                </View>
            <View style={{marginVertical:RFValue(25),justifyContent:'center',alignItems:'center'}}>
              <_Button
+             //onPress={()=>this.navigation(item.navigateTo)}
              styles={{backgroundColor:White, width:screenWidth*0.75,justifyContent:'center',alignItems:'center'}}
              textStyle={{color:_Yellow,}}
              textButton={item.buttonText}

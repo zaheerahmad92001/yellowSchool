@@ -30,6 +30,8 @@ export default StyleSheet.create({
         color:Black
     },
     ButtonView:{
-        marginTop:RFValue(30)
+        marginTop:RFValue(30),
+        justifyContent:'center',
+        alignItems:'center'
     }
 })
