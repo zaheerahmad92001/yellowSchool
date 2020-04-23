@@ -11,8 +11,8 @@ const _Button = props => (
       <View style={{flexDirection:'row',alignItems:'center',marginHorizontal:15}}>
       <Icon
         name={props.IconNmae}
-        type={'MaterialCommunityIcons'}
-        style={[styles.IconStyle]}
+        type={props.type ? props.type: 'MaterialCommunityIcons'}
+        style={[styles.IconStyle,props.iconStyles]}
         />
         <Text style={[styles.text, props.textStyle]}>{props.textButton}</Text>
       </View>

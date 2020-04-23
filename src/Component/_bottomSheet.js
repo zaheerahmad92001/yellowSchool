@@ -12,7 +12,8 @@ const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
 const _BottomSheet=(props)=>{
     return(
-        <View style={props.sigUp ?[styles.container,{height:screenHeight *0.62}]:[styles.container]}>
+        // <View style={props.sigUp ?[styles.container,{height:screenHeight *0.7}]:[styles.container]}>
+        <View style={{backgroundColor:_Yellow}}>
         <View style={{ marginTop:RFValue(40),marginHorizontal:RFValue(20) }}>
             <View>
     <Text style={[styles._headingText,props.headingText]}>{props.Heading}</Text>
@@ -74,7 +75,7 @@ export default _BottomSheet;
 const styles = StyleSheet.create({
     container:{
      backgroundColor: _Yellow,
-    height:screenHeight*0.57
+    height:screenHeight*0.63
     },
     buttonStyle: {
        // backgroundColor: TextColor,

@@ -30,11 +30,14 @@ return(
      </TouchableOpacity>
  </View>
 
- <View style={{flex:7,justifyContent:'center',alignItems:'center'}}>
+ <View style={{flex:6.5,justifyContent:'center',alignItems:'center'}}>
      <Text style={[styles.leftSideText,props.centerTextStyle]}>{props.headerText}</Text>
  </View>
- <View style={{flex:3,justifyContent:'center',alignItems:'center'}}>
+ <View style={{flex:3.5,justifyContent:'center',alignItems:'center',}}>
+   <TouchableOpacity 
+   onPress={props.rightPress}>
 <Text style={[styles.leftSideText,props.rightTextStyle]}>{props.rightText}</Text>
+</TouchableOpacity>
  </View>
 </View>
 
@@ -73,51 +76,6 @@ container:{
     borderBottomRightRadius:RFValue(32),
     
 },
-// content:{
-//     flexDirection:'row',
-//     flex:1,
-//     alignItems:'flex-end',
-//     marginBottom:RFValue(15),
-//     marginHorizontal:RFValue(15)
-    
-// },
-// HeaderText:{
-//     fontSize:RFValue(16),
-//     fontWeight:'500',
-//     color:White,
-    
-// },
-// leftSideHeader:{
-//     flex:3.5,
-//     backgroundColor:'green',
-//     //marginVertical:4,
-//     justifyContent:'flex-start',
-//     alignItems:'flex-start',
-// },
-// leftSideHeaderWithoutIcon:{
-//     flex:3,
-//     marginVertical:RFValue(2)
-// },
-// centerHeader:{
-//     //alignItems:'center',
-//     //flexDirection:'row',
-//     //justifyContent:'center',
-//     //flex:7,
-    
-//    // paddingVertical:RFValue(2)
-// },
-// rightSideHeader:{
-//     flex:3,
-//     alignItems:'flex-end',
-//     justifyContent:'center',
-//     paddingVertical:RFValue(6)
-// },
-// leftSideHeaderTouchable:{
-//     flexDirection:'row',
-//     alignItems:'center',
-//     justifyContent:'flex-start',
-//     //backgroundColor:'red'
-// },
 
 leftSideText:{
 color:White,

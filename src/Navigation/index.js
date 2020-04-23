@@ -12,13 +12,18 @@ import SearchView from '../Container/Search';
 import MessageIntroView from '../Container/MessageIntroView';
 import LessonIntroView from '../Container/LessonIntroView';
 import SingleTutor from '../Container/SingleTutor';
-
+import MessageView from '../Container/MessageView';
+import SlotsAvailable from '../Container/SlotsAvailability';
+import CheckOut from '../Container/CheckOut';
 
 const Stack = createStackNavigator();
 
     function MyStack() {
       return (
-        <Stack.Navigator initialRouteName="SingleTutor"headerMode="none">
+        <Stack.Navigator initialRouteName="CheckOut"headerMode="none">
+          <Stack.Screen name ='CheckOut' component={CheckOut}/>
+          <Stack.Screen name ='SlotsAvailable' component={SlotsAvailable}/>
+          <Stack.Screen name ='MessageView' component={MessageView}/>
           <Stack.Screen name ='SingleTutor' component={SingleTutor}/>
           <Stack.Screen name ='LessonIntroView' component={LessonIntroView}/>
            <Stack.Screen name ='MessageIntroView' component={MessageIntroView}/>
