@@ -7,10 +7,10 @@ import { CardItem, Thumbnail } from 'native-base';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import _HorizontalButton from '../../Component/HorizontalButton';
-import TodaySlots from '../../TodaySlots';
-import TomorrowSlots from '../../TomorrowSlots';
-import SpecificDayOneSlots from '../../specificDayOneSlots';
-import SpecificDayTwoSlots from '../../specificDayTwoSlots';
+import TodaySlots from '../TodaySlots';
+import TomorrowSlots from '../TomorrowSlots';
+import SpecificDayOneSlots from '../specificDayOneSlots';
+import SpecificDayTwoSlots from '../specificDayTwoSlots';
 
 export default class SlotsAvailable extends Component{
     constructor(props){
@@ -81,20 +81,21 @@ export default class SlotsAvailable extends Component{
                   </View>
                   <View style={styles.bottomBorder}></View>
                   <_HorizontalButton
-                  todayClick={()=>this.todayAvailability()}
-                  tomorrowClick={()=>this.tomorrowAvailability()}
-                  Day1Click={()=>this.specificDay1Availability()}
-                  Day2Click={()=>this.specificDay2Availability()}
-                  todayClicked={this.state.todayClicked}
-                  tomorrowClicked={this.state.tomorrowClicked}
-                  Day1Clicked={this.state.Day1Clicked}
-                  Day2Clicked={this.state.Day2Clicked}
-                  today={'Today'}
-                  tomorrow={'Tomorrow'}
-                  specificDay1={'Fri,Mar 13'}
-                  specificDay2={'Sat,Mar 13'}
+                  from={'slotAvailablity'}
+                  firstButtonPress={()=>this.todayAvailability()}
+                  secondButtonPress={()=>this.tomorrowAvailability()}
+                  thirdButtonPress={()=>this.specificDay1Availability()}
+                  forthButtonPress={()=>this.specificDay2Availability()}
+                  firstButtonClicked={this.state.todayClicked}
+                  secondButtonClicked={this.state.tomorrowClicked}
+                  thirdButtonClicked={this.state.Day1Clicked}
+                  forthButtonClicked={this.state.Day2Clicked}
+                  firstButtonHeading={'Today'}
+                  secondButtonHeading={'Tomorrow'}
+                  thirdButtonHeading={'Fri,Mar 13'}
+                  forthButtonHeading={'Sat,Mar 13'}
                   />
-                  <View style={styles.bottomBorder}></View>
+                  <View style={[styles.bottomBorder,{marginTop:RFValue(10)}]}></View>
                  
                  { this.state.todayClicked ?
                  <TodaySlots

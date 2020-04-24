@@ -3,8 +3,8 @@ import {View,Text,Dimensions, FlatList} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styles from './styles';
-import { _Yellow, lightYellow } from '../Colors';
-import _TimeZone from '../Component/TimeZone';
+import { _Yellow, lightYellow } from '../../Colors';
+import _TimeZone from '../../Component/TimeZone';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 const time=[
     {time:'19:00'},
