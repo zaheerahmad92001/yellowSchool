@@ -11,7 +11,7 @@ const _BottomStaticButton=(props)=>{
 <View style={[styles.container,props.containerStyle]}>
           <View style={styles.content}>
               <View>
-              <Text style={styles.ratePerHour}>$18 per hour</Text>  
+              <Text style={[styles.ratePerHour,props.perHourPriceText]}>$18 per hour</Text>  
               <View style={{flexDirection:'row'}}> 
               <Icon
               name={'check'}
@@ -23,6 +23,7 @@ const _BottomStaticButton=(props)=>{
               </View>
            <View  style={{justifyContent:'center',alignItems:'center'}}>
                <_Button
+               onPress={props.BookLesson}
                styles={{backgroundColor:White,width:screenWidth*0.4}}
                textButton={'Book lesson'}
                textStyle={{color:_Yellow,fontWeight:'300'}}
@@ -52,7 +53,7 @@ const _BottomStaticButton=(props)=>{
  refund:{
     marginTop:RFValue(3),
     color:White,
-    fontWeight:'300',
+    fontWeight:'500',
     fontSize:RFValue(14)
  }
     })

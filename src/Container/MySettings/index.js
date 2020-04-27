@@ -9,6 +9,11 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import AccountSetting from '../AccountSetting';
 import PasswordSetting from '../PasswordSetting';
 import _BottomNavigation from '../../Component/bottomNavigation';
+import PaymentMethods from '../PaymentMethods';
+import PaymentHistory from '../PaymentHistory';
+import LessonSetting from '../LessonSetting'
+import CalendarSetting from '../CalendarSetting';
+import NotificationSetting from '../Notification';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 export default class MySettings extends Component{
     constructor(props){
@@ -25,7 +30,7 @@ export default class MySettings extends Component{
             changeSearchIconColor: false,
             changeMessageIconColor: false,
             changeUserIconColor: false,
-            changeSettingIconColor: false
+            changeSettingIconColor: true
 
         }
     }
@@ -183,7 +188,20 @@ _Search = () => {
                 <View style={{marginHorizontal:RFValue(15)}}>
                  {this.state.accountClicked ?
                 <AccountSetting/>:
-                <PasswordSetting/> 
+                this.state.passwordClicked ?
+                <PasswordSetting/> :
+                this.state.paymentMethodsClicked ?
+                <PaymentMethods/>:
+                this.state.paymentHistoryClicked ?
+                <PaymentHistory/>:
+                this.state.lessonsClicked?
+                <LessonSetting/>:
+                this.state.calendarClicked ?
+                <CalendarSetting/>:
+                this.state.notificationClicked ?
+                <NotificationSetting 
+                navigation={this.props.navigation}
+                />:null
                 }
                 </View>
                 </ScrollView>

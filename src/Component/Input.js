@@ -5,20 +5,23 @@ Text,
 TextInput,
 StyleSheet
 }from 'react-native';
-import { Black, BorderBottom } from '../Colors';
+import { Black, BorderBottom, _Yellow } from '../Colors';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 const _TextInput =(props)=>{
     return(
         <View>
             <TextInput
-            style={styles.inputStyle}
+           style={[styles.inputStyle,props.inputBox]}
            placeholder={props.placeholder}
-           placeholderTextColor={'#979797'}
+           placeholderTextColor={props.squarInput? props.placeholderTextColor: '#979797'}
            onChangeText={props.onChangeText}
            value={props.value}
+           secureTextEntry={props.secureTextEntry}
             />
+         { props.squarInput ? null:
             <View style={styles.bottomBorder}></View>
+            }
         </View>
     )
 }

@@ -1,11 +1,11 @@
 import React ,{Component}from 'react';
-import {StyleSheet,Dimensions}from 'react-native';
+import {StyleSheet,Dimensions, YellowBox}from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { _Yellow,White, lightGreen, lightGrey, darkYellow, Black } from '../../Colors';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 export default StyleSheet.create({
     container:{
-        marginTop:RFValue(0),
+       // marginTop:RFValue(0),
     },
     accountText:{
         color:_Yellow,
@@ -67,8 +67,71 @@ export default StyleSheet.create({
         fontWeight:"500",
         color:White,
         fontSize:RFValue(12),
-        
-    }
-        
+    },
+    Heading:{
+        color:_Yellow,
+        fontSize:RFValue(12),
+        fontWeight:'500'
+    },
+    inputStyle:{
+        borderRadius:RFValue(5),
+        borderWidth:1,
+        borderColor:_Yellow,
+        marginVertical:RFValue(10),
+        paddingHorizontal:RFValue(10),
+        marginBottom:RFValue(20),
+        paddingVertical:RFValue(15)
+    },
+    RNPickerView:{
+     marginTop:RFValue(7),   
+     borderRadius:RFValue(5),
+     backgroundColor:White,
+     borderWidth:1,
+     borderColor:_Yellow,
+    },
+    SocialBox:{
+        marginTop:RFValue(20)
+    },
+    socialText:{
+        fontWeight:'300',
+        fontSize:RFValue(14),
+        color:Black
+    },
+    notConnected:{
+        flexDirection:'row',
+    },
+    notConnectedText:{
+        fontWeight:'300',
+        fontSize:RFValue(14),
+        color:lightGrey,
+        marginTop:RFValue(10),
+        marginLeft:RFValue(10)
+    },
+    connectText:{
+        //width:'25%',
+        marginLeft:RFValue(10)
+    },
+    connect:{
+        fontWeight:'300',
+        fontSize:RFValue(14),
+        marginLeft:RFValue(20),
+        color:_Yellow
+    },
+    ButtonBox:{
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:RFValue(20)
+    },
+    saveSetting:{
+      backgroundColor:White,
+      borderRadius:RFValue(5),
+      borderColor:_Yellow,
+      borderWidth:1
+    }  ,
+    testStyle:{
+        color:_Yellow,
+        fontWeight:'500',
+        fontSize:RFValue(13)
+    } 
    
 })

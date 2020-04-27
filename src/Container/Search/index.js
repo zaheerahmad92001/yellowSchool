@@ -145,7 +145,7 @@ export default class SearchView extends Component {
                                 }}
                                 InputAccessoryView={this.InputAccessoryView}
                                 ref={ref => {
-                                    this.inputRefs.industry = ref;
+                                    this.inputRefs.language = ref;
                                 }}
                             />
                         </View>

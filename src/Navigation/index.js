@@ -16,12 +16,32 @@ import MessageView from '../Container/MessageView';
 import SlotsAvailable from '../Container/SlotsAvailability';
 import CheckOut from '../Container/CheckOut';
 import MySettings from '../Container/MySettings';
+import UnsubscribeView from '../Container/UnsubscribeView';
+import FilterView from '../Container/Filters';
+import AllMessages from '../Container/allMessagesView';
+import ScheduledLesson from '../Container/scheduledLesson';
+import UserAccount from '../Container/UserAccount';
+import StudentAge from '../Container/StudentsAge';
+import LevelOfStudents from '../Container/LevelOfStudents';
+import Resume from '../Container/Resume';
+import SubjectsView from '../Container/Subjects';
+
+
 
 const Stack = createStackNavigator();
 
     function MyStack() {
       return (
-        <Stack.Navigator initialRouteName="MySettings"headerMode="none">
+        <Stack.Navigator initialRouteName="SubjectsView"headerMode="none">
+          <Stack.Screen name ='SubjectsView' component={SubjectsView}/>
+          <Stack.Screen name ='Resume' component={Resume}/> 
+          <Stack.Screen name ='LevelOfStudents' component={LevelOfStudents}/>
+          <Stack.Screen name ='StudentAge' component={StudentAge}/>
+           <Stack.Screen name ='UserAccount' component={UserAccount}/>
+           <Stack.Screen name ='ScheduledLesson' component={ScheduledLesson}/>
+           <Stack.Screen name ='AllMessages' component={AllMessages}/>
+           <Stack.Screen name ='FilterView' component={FilterView}/>
+           <Stack.Screen name ='UnsubscribeView' component={UnsubscribeView}/>
           <Stack.Screen name ='MySettings' component={MySettings}/>
           <Stack.Screen name ='CheckOut' component={CheckOut}/>
           <Stack.Screen name ='SlotsAvailable' component={SlotsAvailable}/>
@@ -37,6 +57,7 @@ const Stack = createStackNavigator();
            <Stack.Screen name="SignUp" component={SignUp}/>
            <Stack.Screen name="ForgetPassword" component={ForgetPassword}/>
            <Stack.Screen name='appLanguage' component={appLanguage}/>
+           
         </Stack.Navigator>
       );
     }
