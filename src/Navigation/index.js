@@ -25,6 +25,8 @@ import StudentAge from '../Container/StudentsAge';
 import LevelOfStudents from '../Container/LevelOfStudents';
 import Resume from '../Container/Resume';
 import SubjectsView from '../Container/Subjects';
+import RatingView from '../Container/Rating';
+import AllLessonsView from '../Container/AllLessons';
 
 
 
@@ -32,7 +34,9 @@ const Stack = createStackNavigator();
 
     function MyStack() {
       return (
-        <Stack.Navigator initialRouteName="SubjectsView"headerMode="none">
+        <Stack.Navigator initialRouteName="MessageView"headerMode="none">
+           <Stack.Screen name ='AllLessonsView' component={AllLessonsView}/>
+          <Stack.Screen name ='RatingView' component={RatingView}/>
           <Stack.Screen name ='SubjectsView' component={SubjectsView}/>
           <Stack.Screen name ='Resume' component={Resume}/> 
           <Stack.Screen name ='LevelOfStudents' component={LevelOfStudents}/>

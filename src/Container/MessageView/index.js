@@ -4,6 +4,8 @@ import {
     Text,
     Image, Dimensions,
     FlatList,
+    SafeAreaView,
+    KeyboardAvoidingView,
 } from 'react-native';
 import styles from './styles';
 import _AppHeader from '../../Component/AppHeader';
@@ -18,7 +20,7 @@ export default class MessageView extends Component{
     super(props)
     this.state={
         message:'',
-        showMessage:false,
+        showMessage:true,
     }
     }
     goBack=()=>{
@@ -32,7 +34,7 @@ export default class MessageView extends Component{
     }
     render(){
         return(
-            <Container style={styles.container}>
+            <View style={styles.container}>
             <_AppHeader
                     leftIcon={'keyboard-arrow-left'}
                     leftIconStyle={{color:White}}
@@ -43,12 +45,15 @@ export default class MessageView extends Component{
                     rightPress={()=>this._bookLesson()}
                 
                 />
-               
-            <View style={{flex:1,backgroundColor:White}}>
+   
+            <KeyboardAvoidingView behavior={"padding"} style={{flex:0.8,backgroundColor:White,justifyContent:"flex-end"}}>
 
-            {/* {this.state.showMessage ? 
-            <FromMessage/>:null
-            } */}
+             {/* {this.state.showMessage ?  */}
+
+            <FromMessage/>
+            
+                        
+           {/* <View>
            <View style={{flex:3}}></View>
             <View style={{flex:7,marginHorizontal:RFValue(20),alignItems:'center'}}>
             <Text style={styles.textMessage}>Start a conversation</Text>
@@ -56,7 +61,11 @@ export default class MessageView extends Component{
             <Text style={styles.subHeading}>Share your goals and ask about their</Text>
             <Text style={styles.subHeading}>teaching methods</Text>
             </View>
-            </View>
+            </View> */}
+            
+            
+            </KeyboardAvoidingView> 
+
             <View style={{justifyContent: 'flex-end',flex:0.1 }}>
              <View style={styles.messageBox}>
                 <TextInput
@@ -88,7 +97,7 @@ export default class MessageView extends Component{
 </View>
 
 </View>
-            </Container>
+            </View>
         )
     }
 }
