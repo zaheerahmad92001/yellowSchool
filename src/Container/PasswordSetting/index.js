@@ -7,6 +7,7 @@ import{
 import styles from './styles';
 import _TextInput from '../../Component/Input';
 import _Button from '../../Component/_Button';
+import { _Yellow } from '../../Colors';
 export default class PasswordSetting extends Component{
     constructor(props){
         super(props)

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TextInput, Dimensions, TouchableOpacity, Image, Platform } from 'react-native';
 import { Container, Content, Card, CardItem, Thumbnail, Text, Left, Body, Right } from 'native-base';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { Black, _Yellow, White, lightGrey, lightYellow } from '../Colors';
+import { Black, _Yellow, White, lightGrey, lightYellow, offWhite } from '../Colors';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 const FromMessage = (props) => {
     // <View style={{}}>
@@ -10,32 +10,38 @@ const FromMessage = (props) => {
     // const { item } = props;
     return (
         <View>
+            {props.item.to?
             <View style={styles.container}>
               <View style={{flexDirection:'row'}}>
               <Thumbnail small circular 
-                style={{alignSelf:"flex-end",marginRight:RFValue(10)}}
+                style={{alignSelf:"flex-end",marginRight:RFValue(10),marginBottom:RFValue(30)}}
                 source={require('../Assets/download.jpeg')}
                 />
-                <View style={{ backgroundColor:('rgb(241,241,241)'), borderRadius: 10, padding: 10 ,width:'50%'}}>
-                    <Text style={styles.TextStyle}>{'Yes i am ok with it begin'}</Text>
+                <View>
+                <View style={{ backgroundColor:offWhite, borderRadius: 10, padding: 10 ,width:'80%'}}>
+                    <Text style={styles.TextStyle}>{props.item.to}</Text>
                 </View>
+                <Text style={styles.time}>{props.item.time}</Text>
                 </View>
-                <Text style={styles.time}>{'10:47'}</Text>
 
-            </View>
+                </View>
+                
 
+            </View>:
+     props.item.from ?
             <View style={styles.container2}>
 
                 <View style={{ backgroundColor:lightYellow, borderRadius: 10, padding: 10 }}>
-                    <Text style={styles.TextStyle2}>{"hi! How are you"}</Text>
+                    <Text style={styles.TextStyle2}>{props.item.from}</Text>
                 </View>
 
-                <Text style={styles.time2}>{'10:48 PM'}</Text>
+                <Text style={styles.time2}>{props.item.time}</Text>
 
-            </View>
+            </View>:
+            null 
+            }
         </View>
-    )
-}
+    )}
 
 
 export default FromMessage;
