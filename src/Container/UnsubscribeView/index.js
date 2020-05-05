@@ -17,7 +17,10 @@ export default class UnsubsribeView extends Component {
 
     }
     _Cancel=()=>{
-     //   this.props.navigation.pop()
+        this.props.navigation.pop()
+    }
+    _Done=()=>{
+        this.props.navigation.pop()
     }
     render() {
         return (
@@ -25,6 +28,7 @@ export default class UnsubsribeView extends Component {
                 <_AppHeader
                     leftText={'Done'}
                     headerText={"MYSETTINGS"}
+                    leftPress={()=>this._Done()}
                 />
                 <View style={styles.content}>
                     <View style={styles.ConfirmView}>

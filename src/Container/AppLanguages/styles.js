@@ -19,6 +19,8 @@ export default StyleSheet.create({
    searchView:{
        flexDirection:'row',
        marginTop:RFValue(20),
+       alignItems:'center',
+       justifyContent:'center'
    },
    bottomBorder:{  
     marginTop:RFValue(5),    

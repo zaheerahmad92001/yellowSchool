@@ -45,17 +45,17 @@ export default class MessageView extends Component {
 
 componentWillUnmount() {
   this.keyboardDidShowListener.remove();
-  this.keyboardDidHideListener.remove();
+  //this.keyboardDidHideListener.remove();
 }
 
 _keyboardDidShow() {
   this.scrollView.scrollToEnd({ animated: false })
 }
     goBack = () => {
-        this.props.navigation.navigate('Login')
+        this.props.navigation.pop()
     }
     _bookLesson = () => {
-
+this.props.navigation.navigate('SlotsAvailable')
     }
     _sendMessage = () => {
 
@@ -74,6 +74,7 @@ _keyboardDidShow() {
                         leftIconStyle={{ color: White }}
                         leftText={'Back'}
                         headerText={'Meht T.'}
+                        leftIconPress={()=>this.goBack()}
                         leftPress={() => this.goBack()}
                         rightText={'Book lesson'}
                         rightPress={() => this._bookLesson()}
@@ -131,6 +132,7 @@ _keyboardDidShow() {
                         leftIconStyle={{ color: White }}
                         leftText={'Back'}
                         headerText={'Meht T.'}
+                        leftIconPress={()=>this.goBack()}
                         leftPress={() => this.goBack()}
                         rightText={'Book lesson'}
                         rightPress={() => this._bookLesson()}

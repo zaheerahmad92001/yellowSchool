@@ -78,6 +78,7 @@ target 'yellow_school' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+  pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
 
   target 'yellow_schoolTests' do
     inherit! :complete

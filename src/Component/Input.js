@@ -17,6 +17,7 @@ const _TextInput =(props)=>{
            placeholderTextColor={props.squarInput? props.placeholderTextColor: '#979797'}
            onChangeText={props.onChangeText}
            value={props.value}
+           autoFocus={props.autoFocus}
            secureTextEntry={props.secureTextEntry}
             />
          { props.squarInput ? null:

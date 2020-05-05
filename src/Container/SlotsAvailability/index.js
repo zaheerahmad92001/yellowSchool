@@ -1,5 +1,5 @@
 import React ,{Component}from 'react';
-import {View ,Text}from 'react-native';
+import {View ,Text, SafeAreaView}from 'react-native';
 import styles from './styles'
 import _AppHeader from '../../Component/AppHeader';
 import { White } from '../../Colors';
@@ -16,14 +16,14 @@ export default class SlotsAvailable extends Component{
     constructor(props){
         super(props)
         this.state={
-            todayClicked:false,
+            todayClicked:true,
             tomorrowClicked:false,
             Day1Clicked:false,
             Day2Clicked:false,
         }
     }
     goBack =()=>{
-
+this.props.navigation.pop()
     }
     todayAvailability=()=>{
         this.setState({
@@ -59,14 +59,17 @@ export default class SlotsAvailable extends Component{
     }
     render(){
         return(
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
              <_AppHeader
                     leftIcon={'keyboard-arrow-left'}
                     leftIconStyle={{color:White}}
                     leftText={'Back'}
+                    leftIconPress={()=>this.goBack()}
                     leftPress={()=>this.goBack()}
                 />
-                <ScrollView style={{flex:1,marginHorizontal:RFValue(20),marginTop:RFValue(10)}}>
+                <ScrollView style={{flex:1,marginHorizontal:RFValue(20),marginTop:RFValue(10)}}
+                showsVerticalScrollIndicator={false}
+                >
                   <View style={{flexDirection:'row'}}>
                      <View style={{flex:8,justifyContent:"center",}}>
                          <Text style={styles.lessonTime}>1 hour lesson</Text>
@@ -113,7 +116,7 @@ export default class SlotsAvailable extends Component{
 </View> */}
 
                 </ScrollView>
-            </View>
+            </SafeAreaView>
         )
     }
 }

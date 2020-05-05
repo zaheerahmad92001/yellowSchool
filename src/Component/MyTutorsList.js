@@ -24,6 +24,7 @@ const _MyTutorsList = (props) => {
                 textStyle={{color:_Yellow}}
                 styles={styles.buttonStyle}
                 textButton={'Schedule lesson'}
+                onPress={props.onPress}
                 />
             </View>
         </View>

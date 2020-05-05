@@ -10,4 +10,5 @@ export const offWhite='rgb(243,243,243)';
 export const lightYellow='rgb(255,239,199)';
 export const darkYellow='rgb(219,152,1)';
 export const Red='red';
+export const darkGray='rgb(128,128,128)'
 //export const offWhite='rgb(248,248,248)';

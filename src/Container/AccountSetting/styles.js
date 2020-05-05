@@ -80,7 +80,7 @@ export default StyleSheet.create({
         marginVertical:RFValue(10),
         paddingHorizontal:RFValue(10),
         marginBottom:RFValue(20),
-        paddingVertical:RFValue(15)
+        paddingVertical:RFValue(10)
     },
     RNPickerView:{
      marginTop:RFValue(7),   

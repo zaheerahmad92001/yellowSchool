@@ -7,7 +7,7 @@ export default StyleSheet.create({
         backgroundColor:White,
     },
     content:{
-        flex:8.5,
+        flex:9,
     },
     textMessage:{
         color:Black,
@@ -29,6 +29,6 @@ export default StyleSheet.create({
     marginBottom:RFValue(10)
     },
     bottomNavigator:{
-        flex:1.5
+        flex:1
     }
 })

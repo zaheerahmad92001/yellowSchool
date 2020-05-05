@@ -9,9 +9,12 @@ import {
 import { CardItem, Left, Body, Right, Thumbnail, Icon } from 'native-base';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Black, BorderBottom, lightGreen, _Yellow } from '../Colors';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const _TutorsList = (props) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}
+        onPress={props.onPress}
+        >
             <CardItem>
                 <Left style={{ flex: 2.3, alignSelf: 'flex-start' }}>
                     <Thumbnail circular style={{ justifyContent: 'flex-start' }}
@@ -54,7 +57,7 @@ const _TutorsList = (props) => {
                 </Right>
             </CardItem>
             <View style={styles.bottomBorder}></View>
-        </View>
+        </TouchableOpacity>
     )
 }
 export default _TutorsList;

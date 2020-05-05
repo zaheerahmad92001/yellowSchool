@@ -12,14 +12,14 @@ export default class Splash extends Component{
     }
     componentDidMount(){
         setTimeout(()=>{
-            this.props.navigation.navigate('Login')
+            this.props.navigation.navigate('_AppInfo')
         },1000)
     }
     render(){
         return(
             <View style={styles.container}>
               <Text style={{fontSize:RFValue(20)}}>
-           wlcome to yellow school
+            wlcome to yellow school
               </Text>
             </View>
         )

@@ -22,10 +22,10 @@ export default class ResumeView extends Component {
         }
     }
     goBack = () => {
-
+this.props.navigation.pop()
     }
     _bookLesson = () => {
-
+        this.props.navigation.navigate("SlotsAvailable")
     }
     render() {
         return (
@@ -35,6 +35,7 @@ export default class ResumeView extends Component {
                     leftIconStyle={{ color: White }}
                     leftText={'Back'}
                     headerText={'RESUME'}
+                    leftIconPress={() => this.goBack()}
                     leftPress={() => this.goBack()}
                 />
                 <View style={styles.content}>

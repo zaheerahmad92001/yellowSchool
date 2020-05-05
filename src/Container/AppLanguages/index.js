@@ -24,7 +24,7 @@ const language= [
     {id:'7',name:'Chinies language',selected:false},
     {id:'8',name:'Italian language',selected:false},
 ]
-export default class appLanguage extends Component{
+export default class AppLanguage extends Component{
     constructor(props){
         super(props);
         this.state={
@@ -33,7 +33,7 @@ export default class appLanguage extends Component{
         }
     }
     goBack=()=>{
-  this.props.navigation.navigate('SignUp')
+  //this.props.navigation.navigate('SignUp')
     }
     _Search=()=>{
         

@@ -171,7 +171,7 @@ export default class AccountSetting extends Component{
                     onChangeText={(value)=>this.setState({email:value})}
                     />
                     <Text style={styles.Heading}>Phone number</Text>
-                    <View style={{padding:5}}>
+                    <View style={{padding:0,}}>
                     <ContactInput
                     cca2={cca2}
                     callingCode={callingCode}
@@ -193,7 +193,7 @@ export default class AccountSetting extends Component{
                     onChangeText={(value)=>this.setState({skypeId:value})}
                     />
                     <Text style={styles.Heading}>Skype id</Text>
-                     <View style={[styles.RNPickerView, { paddingVertical: Platform.OS === 'ios' ? 12 : 1,}]}>
+                     <View style={[styles.RNPickerView, { paddingVertical: Platform.OS === 'ios' ? 8 : 1,}]}>
                             <RNPickerSelect
                                 useNativeAndroidPickerStyle={false}
                                 placeholder={placeholder}

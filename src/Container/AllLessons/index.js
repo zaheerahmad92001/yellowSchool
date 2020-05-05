@@ -30,7 +30,7 @@ export default class AllLessonsView extends Component {
         }
     }
     goBack=()=>{
-
+this.props.navigation.pop()
     }
     renderLessons=({item})=>{
         return(
@@ -47,6 +47,7 @@ export default class AllLessonsView extends Component {
                     leftIconStyle={{ color: White }}
                     leftText={'Back'}
                     headerText={'LESSONS'}
+                    leftIconPress={() => this.goBack()}
                     leftPress={() => this.goBack()}
                 />
                 <View style={styles.content}>

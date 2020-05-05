@@ -16,8 +16,8 @@ export default class SignUp extends Component {
             password:''
         }
     }
-    goBack=()=>{
-        this.props.navigation.navigate('appLanguage')
+    _Done=()=>{
+        
     }
     render(){
         return(
@@ -25,7 +25,7 @@ export default class SignUp extends Component {
              <_AppHeader
              leftText={'Done'}
              headerText={'SIGN UP'}
-             leftPress={()=>this.goBack()}
+             leftPress={()=>this._Done()}
              />
              <View style={styles.content}>
                <Text style={styles.Heading}>Name</Text>

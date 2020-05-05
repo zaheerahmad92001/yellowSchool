@@ -1,5 +1,5 @@
-import React ,{Component}from 'react';
-import {View,Text,Dimensions}from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Dimensions, SafeAreaView } from 'react-native';
 import { White } from '../../Colors';
 import styles from './styles';
 import _AppHeader from '../../Component/AppHeader';
@@ -15,17 +15,17 @@ import LessonSetting from '../LessonSetting'
 import CalendarSetting from '../CalendarSetting';
 import NotificationSetting from '../Notification';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
-export default class MySettings extends Component{
-    constructor(props){
+export default class MySettings extends Component {
+    constructor(props) {
         super(props)
-        this.state={
-            accountClicked:true,
-            passwordClicked:false,
-            paymentMethodsClicked:false,
-            paymentHistoryClicked:false,
-            lessonsClicked:false,
-            calendarClicked:false,
-            notificationClicked:false,
+        this.state = {
+            accountClicked: true,
+            passwordClicked: false,
+            paymentMethodsClicked: false,
+            paymentHistoryClicked: false,
+            lessonsClicked: false,
+            calendarClicked: false,
+            notificationClicked: false,
 
             changeSearchIconColor: false,
             changeMessageIconColor: false,
@@ -34,188 +34,196 @@ export default class MySettings extends Component{
 
         }
     }
-    _Accounts=()=>{
+    _Accounts = () => {
         this.setState({
-            accountClicked:true,
-            passwordClicked:false,
-            paymentMethodsClicked:false,
-            paymentHistoryClicked:false,
-            lessonsClicked:false,
-            calendarClicked:false,
-            notificationClicked:false
+            accountClicked: true,
+            passwordClicked: false,
+            paymentMethodsClicked: false,
+            paymentHistoryClicked: false,
+            lessonsClicked: false,
+            calendarClicked: false,
+            notificationClicked: false
         })
     }
-    _Password=()=>{
+    _Password = () => {
         this.setState({
-            accountClicked:false,
-            passwordClicked:true,
-            paymentMethodsClicked:false,
-            paymentHistoryClicked:false,
-            lessonsClicked:false,
-            calendarClicked:false,
-            notificationClicked:false
+            accountClicked: false,
+            passwordClicked: true,
+            paymentMethodsClicked: false,
+            paymentHistoryClicked: false,
+            lessonsClicked: false,
+            calendarClicked: false,
+            notificationClicked: false
         })
 
     }
-    _PaymentMethod=()=>{
+    _PaymentMethod = () => {
         this.setState({
-            accountClicked:false,
-            passwordClicked:false,
-            paymentMethodsClicked:true,
-            paymentHistoryClicked:false,
-            lessonsClicked:false,
-            calendarClicked:false,
-            notificationClicked:false
+            accountClicked: false,
+            passwordClicked: false,
+            paymentMethodsClicked: true,
+            paymentHistoryClicked: false,
+            lessonsClicked: false,
+            calendarClicked: false,
+            notificationClicked: false
+        })  
+    }
+    _PaymentHistory = () => {
+        this.setState({
+            accountClicked: false,
+            passwordClicked: false,
+            paymentMethodsClicked: false,
+            paymentHistoryClicked: true,
+            lessonsClicked: false,
+            calendarClicked: false,
+            notificationClicked: false
         })
     }
-    _PaymentHistory=()=>{
+    _Lessons = () => {
         this.setState({
-            accountClicked:false,
-            passwordClicked:false,
-            paymentMethodsClicked:false,
-            paymentHistoryClicked:true,
-            lessonsClicked:false,
-            calendarClicked:false,
-            notificationClicked:false
+            accountClicked: false,
+            passwordClicked: false,
+            paymentMethodsClicked: false,
+            paymentHistoryClicked: false,
+            lessonsClicked: true,
+            calendarClicked: false,
+            notificationClicked: false
         })
     }
-    _Lessons=()=>{
+    _Calendar = () => {
         this.setState({
-            accountClicked:false,
-            passwordClicked:false,
-            paymentMethodsClicked:false,
-            paymentHistoryClicked:false,
-            lessonsClicked:true,
-            calendarClicked:false,
-            notificationClicked:false
+            accountClicked: false,
+            passwordClicked: false,
+            paymentMethodsClicked: false,
+            paymentHistoryClicked: false,
+            lessonsClicked: false,
+            calendarClicked: true,
+            notificationClicked: false
         })
     }
-    _Calendar=()=>{
+    _Notifications = () => {
         this.setState({
-            accountClicked:false,
-            passwordClicked:false,
-            paymentMethodsClicked:false,
-            paymentHistoryClicked:false,
-            lessonsClicked:false,
-            calendarClicked:true,
-            notificationClicked:false
-        }) 
+            accountClicked: false,
+            passwordClicked: false,
+            paymentMethodsClicked: false,
+            paymentHistoryClicked: false,
+            lessonsClicked: false,
+            calendarClicked: false,
+            notificationClicked: true
+        })
     }
-    _Notifications=()=>{
-        this.setState({
-            accountClicked:false,
-            passwordClicked:false,
-            paymentMethodsClicked:false,
-            paymentHistoryClicked:false,
-            lessonsClicked:false,
-            calendarClicked:false,
-            notificationClicked:true
-        })   
-    }
-_Search = () => {
+    _Search = () => {
 
-        this.setState({
-            changeSearchIconColor: true,
-            changeMessageIconColor: false,
-            changeUserIconColor: false,
-            changeSettingIconColor: false
-        })
+        // this.setState({
+        //     changeSearchIconColor: true,
+        //     changeMessageIconColor: false,
+        //     changeUserIconColor: false,
+        //     changeSettingIconColor: false
+        // })
+        this.props.navigation.navigate('LessonIntroView')
     }
     _MessageClick = () => {
-        this.setState({
-            changeSearchIconColor: false,
-            changeMessageIconColor: true,
-            changeUserIconColor: false,
-            changeSettingIconColor: false
-        })
+        // this.setState({
+        //     changeSearchIconColor: false,
+        //     changeMessageIconColor: true,
+        //     changeUserIconColor: false,
+        //     changeSettingIconColor: false
+        // })
+        this.props.navigation.navigate('MessageIntroView')
     }
     _UserClick = () => {
-        this.setState({
-            changeSearchIconColor: false,
-            changeMessageIconColor: false,
-            changeUserIconColor: true,
-            changeSettingIconColor: false
-        })
+        // this.setState({
+        //     changeSearchIconColor: false,
+        //     changeMessageIconColor: false,
+        //     changeUserIconColor: true,
+        //     changeSettingIconColor: false
+        // })
+        this.props.navigation.navigate('MyTutorList')
     }
     _SettingClick = () => {
-        this.setState({
-            changeSearchIconColor: false,
-            changeMessageIconColor: false,
-            changeUserIconColor: false,
-            changeSettingIconColor: true
-        })
+        // this.setState({
+        //     changeSearchIconColor: false,
+        //     changeMessageIconColor: false,
+        //     changeUserIconColor: false,
+        //     changeSettingIconColor: true
+        // })
+        this.props.navigation.navigate('MySettings')
     }
-    render(){
-        return(
-            <View style={styles.container}>
+    render() {
+        return (
+            <SafeAreaView style={styles.container}>
                 <_AppHeader
-                leftText={'Done'}
-                headerText={'MySETTINGS'}
+                    leftText={'Done'}
+                    headerText={'MySETTINGS'}
                 />
                 <ScrollView horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                style={styles.buttonStyle}
+                    showsHorizontalScrollIndicator={false}
+                    style={styles.buttonStyle}
                 >
-                <_HorizontalButton
-                  from={'Mysettings'}
-                  firstButtonPress={()=>this._Accounts()}
-                  secondButtonPress={()=>this._Password()}
-                  thirdButtonPress={()=>this._PaymentMethod()}
-                  forthButtonPress={()=>this._PaymentHistory()}
-                  fifthButtonPress={()=>this._Lessons()}
-                  sixButtonPress={()=>this._Calendar()}
-                  seventhButtonPress={()=>this._Notifications()}
-                  
-                  firstButtonClicked={this.state.accountClicked}
-                  secondButtonClicked={this.state.passwordClicked}
-                  thirdButtonClicked={this.state.paymentMethodsClicked}
-                  forthButtonClicked={this.state.paymentHistoryClicked}
-                  fifthButtonClicked={this.state.lessonsClicked}
-                  sixButtonClicked={this.state.calendarClicked}
-                  seventhButtonClicked={this.state.notificationClicked}
+                    <_HorizontalButton
+                        from={'Mysettings'}
+                        firstButtonPress={() => this._Accounts()}
+                        secondButtonPress={() => this._Password()}
+                        thirdButtonPress={() => this._PaymentMethod()}
+                        forthButtonPress={() => this._PaymentHistory()}
+                        fifthButtonPress={() => this._Lessons()}
+                        sixButtonPress={() => this._Calendar()}
+                        seventhButtonPress={() => this._Notifications()}
 
-                  firstButtonHeading={'Accounts'}
-                  secondButtonHeading={'Password'}
-                  thirdButtonHeading={'Payment methods'}
-                  forthButtonHeading={'Payment history'}
-                  fifthButtonHeading={'Lessons'}
-                  sixButtonHeading={'Calendar'}
-                  seventhButtonHeading={'Notifications'}
-                  
-                  />
+                        firstButtonClicked={this.state.accountClicked}
+                        secondButtonClicked={this.state.passwordClicked}
+                        thirdButtonClicked={this.state.paymentMethodsClicked}
+                        forthButtonClicked={this.state.paymentHistoryClicked}
+                        fifthButtonClicked={this.state.lessonsClicked}
+                        sixButtonClicked={this.state.calendarClicked}
+                        seventhButtonClicked={this.state.notificationClicked}
+
+                        firstButtonHeading={'Accounts'}
+                        secondButtonHeading={'Password'}
+                        thirdButtonHeading={'Payment methods'}
+                        forthButtonHeading={'Payment history'}
+                        fifthButtonHeading={'Lessons'}
+                        sixButtonHeading={'Calendar'}
+                        seventhButtonHeading={'Notifications'}
+
+                    />
                 </ScrollView>
-                <ScrollView showsVerticalScrollIndicator={false} style={{height:screenHeight*0.60,}}>
-                <View style={{marginHorizontal:RFValue(15)}}>
-                 {this.state.accountClicked ?
-                <AccountSetting/>:
-                this.state.passwordClicked ?
-                <PasswordSetting/> :
-                this.state.paymentMethodsClicked ?
-                <PaymentMethods/>:
-                this.state.paymentHistoryClicked ?
-                <PaymentHistory/>:
-                this.state.lessonsClicked?
-                <LessonSetting/>:
-                this.state.calendarClicked ?
-                <CalendarSetting/>:
-                this.state.notificationClicked ?
-                <NotificationSetting 
-                navigation={this.props.navigation}
-                />:null
-                }
+                <ScrollView showsVerticalScrollIndicator={false} style={{ height: screenHeight * 0.60, }}>
+                    <View style={{ marginHorizontal: RFValue(15) }}>
+                        {this.state.accountClicked ?
+                            <AccountSetting /> :
+                            this.state.passwordClicked ?
+                                <PasswordSetting /> :
+                                this.state.paymentMethodsClicked ?
+                                    <PaymentMethods 
+                                    navigation={this.props.navigation}
+                                    /> :
+                                    this.state.paymentHistoryClicked ?
+                                        <PaymentHistory /> :
+                                        this.state.lessonsClicked ?
+                                            <LessonSetting /> :
+                                            this.state.calendarClicked ?
+                                                <CalendarSetting /> :
+                                                this.state.notificationClicked ?
+                                                    <NotificationSetting
+                                                        navigation={this.props.navigation}
+                                                    /> : null
+                        }
+                    </View>
+                </ScrollView>
+                <View style={{ height: screenHeight * 0.1 }}>
+                    <_BottomNavigation
+                        SearchClick={() => this._Search()}
+                        changeSearchIconColor={this.state.changeSearchIconColor}
+                        MessageClick={() => this._MessageClick()}
+                        changeMessageIconColor={this.state.changeMessageIconColor}
+                        UserClick={() => this._UserClick()}
+                        changeUserIconColor={this.state.changeUserIconColor}
+                        SettingClick={() => this._SettingClick()}
+                        changeSettingIconColor={this.state.changeSettingIconColor}
+                    />
                 </View>
-                </ScrollView>
-                <_BottomNavigation
-                    SearchClick={() => this._Search()}
-                    changeSearchIconColor={this.state.changeSearchIconColor}
-                    MessageClick={() => this._MessageClick()}
-                    changeMessageIconColor={this.state.changeMessageIconColor}
-                    UserClick={() => this._UserClick()}
-                    changeUserIconColor={this.state.changeUserIconColor}
-                    SettingClick={() => this._SettingClick()}
-                    changeSettingIconColor={this.state.changeSettingIconColor}
-                />
-            </View>
+            </SafeAreaView>
         )
     }
 }

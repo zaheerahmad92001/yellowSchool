@@ -5,7 +5,8 @@ import {
     Dimensions,
     StyleSheet,
     StatusBar,
-    Platform
+    Platform,
+    SafeAreaView
 } from 'react-native';
 import { headerColor, White, _Yellow, Black } from '../../Colors';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -26,17 +27,17 @@ const language = [
     { label: 'Chinies language', value: 'Chinies language' },
     { label: 'Italian language', value: 'Italian language' },
 ]
-const tutorsList =[
-    {name:'Methew T.',rating:'4.9',type:'New',review:'(9)',totalLesson:'33',tutorCategory:'Certified English Tutor',ratePerHour:' $12/H'},
-    {name:'Methew T.',rating:'4.9',review:'(9)',totalLesson:'33',tutorCategory:'Certified English Tutor',ratePerHour:' $12/H'},
-    {name:'Methew T.',rating:'4.9',type:'New',review:'(9)',totalLesson:'33',tutorCategory:'Certified English Tutor',ratePerHour:' $ 12/H'},
-    {name:'Methew T.',rating:'4.9',review:'(9)',totalLesson:'33',tutorCategory:'Certified English Tutor',ratePerHour:' $ 12/H'},
-    {name:'Methew T.',rating:'4.9',type:'New',review:'(9)',totalLesson:'33',tutorCategory:'Certified English Tutor',ratePerHour:' $ 12/H'},
-    {name:'Methew T.',rating:'4.9',review:'(9)',totalLesson:'33',tutorCategory:'Certified English Tutor',ratePerHour:' $ 12/H'},
-    {name:'Methew T.',rating:'4.9',review:'(9)',totalLesson:'33',tutorCategory:'Certified English Tutor',ratePerHour:' $ 12/H'},
-    {name:'Methew T.',rating:'4.9',review:'(9)',totalLesson:'33',tutorCategory:'Certified English Tutor',ratePerHour:' $ 12/H'},
-    {name:'Methew T.',rating:'4.9',type:'New',review:'(9)',totalLesson:'33',tutorCategory:'Certified English Tutor',ratePerHour:' $ 12/H'},
-    {name:'Methew T.',rating:'4.9',type:'New',review:'(9)',totalLesson:'33',tutorCategory:'Certified English Tutor',ratePerHour:' $ 12/H'},
+const tutorsList = [
+    { name: 'Methew T.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $12/H' },
+    { name: 'Methew T.', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $12/H' },
+    { name: 'Methew T.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
+    { name: 'Methew T.', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
+    { name: 'Methew T.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
+    { name: 'Methew T.', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
+    { name: 'Methew T.', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
+    { name: 'Methew T.', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
+    { name: 'Methew T.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
+    { name: 'Methew T.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
 
 
 ]
@@ -45,7 +46,7 @@ export default class SearchView extends Component {
         super(props)
         this.state = {
             selectedLanguage: '',
-            changeSearchIconColor: false,
+            changeSearchIconColor: true,
             changeMessageIconColor: false,
             changeUserIconColor: false,
             changeSettingIconColor: false
@@ -63,6 +64,7 @@ export default class SearchView extends Component {
             changeUserIconColor: false,
             changeSettingIconColor: false
         })
+        this.props.navigation.navigate('LessonIntroView')
     }
     _MessageClick = () => {
         this.setState({
@@ -71,6 +73,7 @@ export default class SearchView extends Component {
             changeUserIconColor: false,
             changeSettingIconColor: false
         })
+        this.props.navigation.navigate('MessageIntroView')
     }
     _UserClick = () => {
         this.setState({
@@ -79,6 +82,7 @@ export default class SearchView extends Component {
             changeUserIconColor: true,
             changeSettingIconColor: false
         })
+        this.props.navigation.navigate('MyTutorList')
     }
     _SettingClick = () => {
         this.setState({
@@ -87,15 +91,17 @@ export default class SearchView extends Component {
             changeUserIconColor: false,
             changeSettingIconColor: true
         })
+        this.props.navigation.navigate('MySettings')
     }
-    renderTutorList=({item})=>{
-     return(
-    <_TutorsList
-    item={item}
-    />
+    renderTutorList = ({ item }) => {
+        return (
+            <_TutorsList
+              item={item}
+              onPress={()=>this.props.navigation.navigate('SingleTutor')}  
+            />
 
-    
-     )
+
+        )
     }
     render() {
         const placeholder = {
@@ -106,7 +112,7 @@ export default class SearchView extends Component {
             fontSize: RFValue(14)
         }
         return (
-            <Container style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
                     <StatusBar backgroundColor={_Yellow} barStyle={'light-content'} />
                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end', bottom: RFValue(5) }}>
@@ -152,33 +158,35 @@ export default class SearchView extends Component {
                     </View>
                 </View>
                 <View style={styles.content}>
-                <FlatList
-                extraData={tutorsList}
-                data={tutorsList}
-                keyExtractor={(item)=>{item.id}}
-                renderItem={this.renderTutorList}
-                showsVerticalScrollIndicator={false}
-                />
-<View style={styles.filters}>
-    <Icon
-    name={'filter-list'}
-    type={'MaterialIcons'}
-    style={{fontSize:RFValue(20),color:Black}}
-    />
-    <Text style={styles.filteText}>Filters</Text>
-</View>
+                    <FlatList
+                        extraData={tutorsList}
+                        data={tutorsList}
+                        keyExtractor={(item) => { item.id }}
+                        renderItem={this.renderTutorList}
+                        showsVerticalScrollIndicator={false}
+                    />
+                    <View style={styles.filters}>
+                        <Icon
+                            name={'filter-list'}
+                            type={'MaterialIcons'}
+                            style={{ fontSize: RFValue(20), color: Black }}
+                        />
+                        <Text style={styles.filteText}>Filters</Text>
+                    </View>
                 </View>
-                <_BottomNavigation
-                    SearchClick={() => this._Search()}
-                    changeSearchIconColor={this.state.changeSearchIconColor}
-                    MessageClick={() => this._MessageClick()}
-                    changeMessageIconColor={this.state.changeMessageIconColor}
-                    UserClick={() => this._UserClick()}
-                    changeUserIconColor={this.state.changeUserIconColor}
-                    SettingClick={() => this._SettingClick()}
-                    changeSettingIconColor={this.state.changeSettingIconColor}
-                />
-            </Container>
+                <View style={{ flex: 1 }}>
+                    <_BottomNavigation
+                        SearchClick={() => this._Search()}
+                        changeSearchIconColor={this.state.changeSearchIconColor}
+                        MessageClick={() => this._MessageClick()}
+                        changeMessageIconColor={this.state.changeMessageIconColor}
+                        UserClick={() => this._UserClick()}
+                        changeUserIconColor={this.state.changeUserIconColor}
+                        SettingClick={() => this._SettingClick()}
+                        changeSettingIconColor={this.state.changeSettingIconColor}
+                    />
+                </View>
+            </SafeAreaView>
         )
     }
 }

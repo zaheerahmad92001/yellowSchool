@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         borderColor: _Yellow,
         paddingHorizontal: RFValue(10),
         borderRadius: RFValue(5),
-        paddingVertical: Platform.OS === 'ios' ? 10 : 5,
+        paddingVertical: Platform.OS === 'ios' ? 5 : 5,
     }
 
 

@@ -38,10 +38,10 @@ export default class StudentAge extends Component{
         )
     }
     goBack=()=>{
-        
+        this.props.navigation.pop();
     }
     _bookLesson=()=>{
-       
+   this.props.navigation.navigate("SlotsAvailable")
     }
     render(){
         return(
@@ -51,6 +51,7 @@ export default class StudentAge extends Component{
                     leftIconStyle={{color:White}}
                     leftText={'Back'}
                     headerText={'STUDENT AGE'}
+                    leftIconPress={()=>this.goBack()}
                     leftPress={()=>this.goBack()}
                 />
                 <View style={styles.content}>

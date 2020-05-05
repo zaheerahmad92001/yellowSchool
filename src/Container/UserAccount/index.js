@@ -14,6 +14,49 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import _BottomNavigation from '../../Component/bottomNavigation';
 const {height:screenHeight,width:screenWidth}= Dimensions.get('window');
 export default class UserAccount extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+
+        }
+    }
+    _Search = () => {
+        // this.setState({
+        //     changeSearchIconColor: true,
+        //     changeMessageIconColor: false,
+        //     changeUserIconColor: false,
+        //     changeSettingIconColor: false,
+        // })
+        this.props.navigation.navigate('LessonIntroView')
+    }
+    _MessageClick = () => {
+        // this.setState({
+        //     changeSearchIconColor: false,
+        //     changeMessageIconColor: true,
+        //     changeUserIconColor: false,
+        //     changeSettingIconColor: false
+        // } )
+        this.props.navigation.navigate('MessageIntroView')
+    }
+    _UserClick = () => {
+        // this.setState({
+        //     changeSearchIconColor: false,
+        //     changeMessageIconColor: false,
+        //     changeUserIconColor: true,
+        //     changeSettingIconColor: false
+        // })
+        this.props.navigation.navigate('MyTutorList')
+    }
+    _SettingClick = () => {
+        // this.setState({
+        //     changeSearchIconColor: false,
+        //     changeMessageIconColor: false,
+        //     changeUserIconColor: false,
+        //     changeSettingIconColor: true
+        // })
+        this.props.navigation.navigate('MySettings')
+    }
+
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -109,8 +152,17 @@ export default class UserAccount extends Component {
                   </View>
                  
                 </Content>
-                <View style={{height:screenHeight*0.13}}>
-                <_BottomNavigation/>
+                <View style={{height:screenHeight*0.1}}>
+                <_BottomNavigation
+                    SearchClick={() => this._Search()}
+                    changeSearchIconColor={this.state.changeSearchIconColor}
+                    MessageClick={() => this._MessageClick()}
+                    changeMessageIconColor={this.state.changeMessageIconColor}
+                    UserClick={() => this._UserClick()}
+                    changeUserIconColor={this.state.changeUserIconColor}
+                    SettingClick={() => this._SettingClick()}
+                    changeSettingIconColor={this.state.changeSettingIconColor}
+                />
                 </View>
             </SafeAreaView>
         )

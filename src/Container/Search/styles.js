@@ -22,7 +22,7 @@ export default StyleSheet.create({
         marginHorizontal:RFValue(5)
     },
     content:{
-        flex:8.5,
+        flex:9,
         marginTop:RFValue(10)
     },
     filters:{

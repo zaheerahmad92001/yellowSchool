@@ -5,7 +5,8 @@ import {
     Dimensions,
     StyleSheet,
     StatusBar,
-    Platform
+    Platform,
+    SafeAreaView
 } from 'react-native';
 import { headerColor, White, _Yellow, Black, lightGrey, offWhite } from '../../Colors';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -24,42 +25,49 @@ export default class  LessonIntroView extends Component{
             changeUserIconColor: false,
             changeSettingIconColor: false
         }
+    
     }
     _Search = () => {
-        this.setState({
-            changeSearchIconColor: true,
-            changeMessageIconColor: false,
-            changeUserIconColor: false,
-            changeSettingIconColor: false
-        })
+        // this.setState({
+        //     changeSearchIconColor: true,
+        //     changeMessageIconColor: false,
+        //     changeUserIconColor: false,
+        //     changeSettingIconColor: false,
+        // })
+        this.props.navigation.navigate('LessonIntroView')
     }
     _MessageClick = () => {
-        this.setState({
-            changeSearchIconColor: false,
-            changeMessageIconColor: true,
-            changeUserIconColor: false,
-            changeSettingIconColor: false
-        })
+        // this.setState({
+        //     changeSearchIconColor: false,
+        //     changeMessageIconColor: true,
+        //     changeUserIconColor: false,
+        //     changeSettingIconColor: false
+        // } )
+        this.props.navigation.navigate('MessageIntroView')
     }
     _UserClick = () => {
-        this.setState({
-            changeSearchIconColor: false,
-            changeMessageIconColor: false,
-            changeUserIconColor: true,
-            changeSettingIconColor: false
-        })
+        // this.setState({
+        //     changeSearchIconColor: false,
+        //     changeMessageIconColor: false,
+        //     changeUserIconColor: true,
+        //     changeSettingIconColor: false
+        // })
+        this.props.navigation.navigate('MyTutorList')
     }
     _SettingClick = () => {
-        this.setState({
-            changeSearchIconColor: false,
-            changeMessageIconColor: false,
-            changeUserIconColor: false,
-            changeSettingIconColor: true
-        })
+        // this.setState({
+        //     changeSearchIconColor: false,
+        //     changeMessageIconColor: false,
+        //     changeUserIconColor: false,
+        //     changeSettingIconColor: true
+        // })
+        this.props.navigation.navigate('MySettings')
     }
     render(){
+        
+        //const param = this.props.route.params.param
         return(
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <StatusBar backgroundColor={_Yellow} barStyle={'light-content'}/>
                 <View style={styles.content}>
                    <View style={{flex:3}}></View>
@@ -70,6 +78,7 @@ export default class  LessonIntroView extends Component{
                       <View style={styles.tutorButtonView}>
                         <_Button
                         styles={{width:screenWidth*0.35,marginLeft:0}}
+                        onPress={()=>this.props.navigation.navigate('SearchView')}
                         textButton={'Find a tutor'}
                         />
                       </View>
@@ -78,6 +87,7 @@ export default class  LessonIntroView extends Component{
                         styles={{width:screenWidth*0.25,marginLeft:0,backgroundColor:offWhite}}
                         textStyle={{color:Black}}
                         textButton={'Login'}
+                        onPress={()=>this.props.navigation.navigate('Account')}
                         />
                       </View>
                    </View>
@@ -98,7 +108,7 @@ export default class  LessonIntroView extends Component{
                     changeSettingIconColor={this.state.changeSettingIconColor}
                 />
                 </View>
-            </View>
+            </SafeAreaView>
         )
     }
 }

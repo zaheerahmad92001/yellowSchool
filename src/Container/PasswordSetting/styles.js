@@ -30,7 +30,7 @@ export default StyleSheet.create({
         marginVertical:RFValue(10),
         paddingHorizontal:RFValue(10),
         marginBottom:RFValue(20),
-        paddingVertical:RFValue(15)
+        paddingVertical:RFValue(10)
     },
     content:{
         marginTop:RFValue(25)

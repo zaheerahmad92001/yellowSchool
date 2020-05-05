@@ -17,7 +17,7 @@ export default class Login extends Component {
         }
     }
     goBack=()=>{
-        this.props.navigation.navigate('SignUp')
+        this.props.navigation.pop()
     }
     render() {
         return (

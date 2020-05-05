@@ -13,8 +13,8 @@ const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 const _BottomSheet=(props)=>{
     return(
         // <View style={props.sigUp ?[styles.container,{height:screenHeight *0.7}]:[styles.container]}>
-        <View style={{backgroundColor:_Yellow}}>
-        <View style={{ marginTop:RFValue(40),marginHorizontal:RFValue(20) }}>
+        <View style={{backgroundColor:_Yellow,borderTopLeftRadius:RFValue(10),borderTopRightRadius:RFValue(10)}}>
+        <View style={{ marginTop:RFValue(40),marginHorizontal:RFValue(20) ,marginBottom:RFValue(10)}}>
             <View>
     <Text style={[styles._headingText,props.headingText]}>{props.Heading}</Text>
     <Text style={[styles._subHeading,props.subHeading]}>{props.subHeading}</Text>

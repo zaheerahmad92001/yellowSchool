@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions, Image } from 'react-native';
+import { View, Text, ScrollView, Dimensions, Image, SafeAreaView } from 'react-native';
 import styles from './styles'
 import _AppHeader from '../../Component/AppHeader';
 import { White, _Yellow, lightGrey, lightGreen, lightYellow } from '../../Colors';
@@ -20,7 +20,7 @@ export default class CheckOut extends Component {
         }
     }
     goBack = () => {
-        alert('go back')
+     this.props.navigation.pop()
     }
     _cardsClicked = () => {
         this.setState({
@@ -40,13 +40,13 @@ export default class CheckOut extends Component {
         })
     }
     _Continue = () => {
-        alert('calla')
+    this.props.navigation.navigate('Paymetn')
     }
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
 
-                <ScrollView style={{ height: screenHeight, paddingTop: RFValue(70), backgroundColor: _Yellow, }}>
+                <ScrollView style={{ height: screenHeight, paddingTop: RFValue(60), backgroundColor: _Yellow, }}>
                     <View style={styles.mainView}>
                         <View style={styles.tutorProfile}>
                             <View style={{ flex: 2, }}>
@@ -300,7 +300,7 @@ export default class CheckOut extends Component {
                     leftPress={() => this.goBack()}
                 />
 
-            </View>
+            </SafeAreaView>
         )
     }
 }

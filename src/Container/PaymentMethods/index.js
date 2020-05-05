@@ -18,7 +18,7 @@ export default class PaymentMethods extends Component{
         }
     }
     _saveCard=()=>{
-
+this.props.navigation.navigate('CheckOut')
     }
     render(){
         return(

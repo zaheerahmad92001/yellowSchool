@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { StyleSheet ,View,Text,Image,Dimensions } from 'react-native';
+import { StyleSheet ,View,Text,Image,Dimensions, SafeAreaView } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import _Navigation from '../../Navigation';
 import Account from '../Account';
@@ -7,6 +7,8 @@ import { White, _Yellow, Black } from '../../Colors';
 import styles from './styles'
 import _Button from '../../Component/_Button';
 import { RFValue } from 'react-native-responsive-fontsize';
+import AppLanguage from '../AppLanguages';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 const slides = [
     {
@@ -88,9 +90,15 @@ export default class _AppInfo extends Component{
       }
       render(){
         if (this.state.showRealApp) {
-            return <Account/>;
+            return (
+              <SafeAreaProvider>
+            <Account navigation={this.props.navigation}/>
+            </SafeAreaProvider>
+            )
           } else {
-            return <AppIntroSlider renderItem={this._renderItem}
+            return(
+            <SafeAreaProvider>
+            <AppIntroSlider renderItem={this._renderItem}
              data={slides} 
              onDone={this._onDone}
              bottomButton={false}
@@ -102,7 +110,8 @@ export default class _AppInfo extends Component{
                   backgroundColor:'white',
                   //marginBottom:200
               }}
-             />;
-          }
+             />
+             </SafeAreaProvider>
+            )}
       }
 }

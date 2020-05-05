@@ -8,13 +8,13 @@ export default StyleSheet.create({
         
     },
     content:{
-        flex:1,
+        flex:9,
         marginTop:RFValue(10)    
     },
     contentSecond:{
         marginHorizontal:RFValue(20),
         marginTop:RFValue(20),
-        flex:8.5,
+        flex:9,
     },
     settingStyle:{
         flexDirection:'row',

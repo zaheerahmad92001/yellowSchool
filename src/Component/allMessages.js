@@ -11,7 +11,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const _AllMessages = (props) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={props.onPress}
+        >
         <CardItem>
             <Left style={{ flex: 2,alignSelf: 'flex-start' }}>
                 <Thumbnail circular

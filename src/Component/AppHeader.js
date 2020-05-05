@@ -14,7 +14,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const {height:screenHeight,width:screenWidth} = Dimensions.get('window');
 const _AppHeader =(props)=>{
 return(
-<View style={[styles.container,props.styles ]}>
+<View style={Platform.OS==='android'?[styles.container,props.styles,{height:screenHeight*0.08} ]: [styles.container,props.styles ]}>
   <StatusBar backgroundColor={_Yellow} barStyle={'light-content'}/>
 <View style={{flex:1,flexDirection:'row',alignItems:'flex-end',bottom:RFValue(15)}}>
  <View style={{flex:3,justifyContent:'center',alignItems:'center',flexDirection:'row'}}>

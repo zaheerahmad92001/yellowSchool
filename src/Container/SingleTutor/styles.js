@@ -109,6 +109,22 @@ moreabout:{
     marginTop:RFValue(10),
     color:_Yellow,
     marginHorizontal:RFValue(15)
-}
+},
+
+
+  toolbar: {
+    marginTop: 30,
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 5,
+  },
+  mediaPlayer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    backgroundColor: 'black',
+  },
 
 })
