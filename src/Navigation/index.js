@@ -27,23 +27,32 @@ import Resume from '../Container/Resume';
 import SubjectsView from '../Container/Subjects';
 import RatingView from '../Container/Rating';
 import AllLessonsView from '../Container/AllLessons';
-import Paymetn from '../Container/Payment';
-
-
-
-
-
-
+import Payment from '../Container/Payment';
 
 const Stack = createStackNavigator();
+const LoadingStack = createStackNavigator();
+const SliderStack = createStackNavigator();
 
+// function Splashscreen(){
+//   return(
+//     <LoadingStack.Navigator initialRouteName="splash" headerMode="none">
+//      <LoadingStack.Screen name='splash' component={Splash} />
+//     </LoadingStack.Navigator>
+//   )
+// }
+// function AppSlider (){
+//   return(
+//     <SliderStack.Navigator initialRouteName="splash" headerMode="none">
+//       <SliderStack.Screen name='_AppInfo' component={_AppInfo} />
+//       <SliderStack.Screen name='splash' component={Splashscreen} />
+//     </SliderStack.Navigator>
+//   )
+// }
 function MyStack() {
   return (
     <Stack.Navigator initialRouteName="splash" headerMode="none">
-     
-      <Stack.Screen name='splash' component={Splash} />
-      <Stack.Screen name='_AppInfo' component={_AppInfo} />
-      {/* <Stack.Screen name='Accounts' component={Accounts} /> */}
+       <Stack.Screen name ="splash" component={Splash}/>
+       <Stack.Screen name ="_AppInfo" component={_AppInfo}/>
       <Stack.Screen name="Account" component={Account} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={SignUp} />
@@ -61,7 +70,7 @@ function MyStack() {
       <Stack.Screen name='Resume' component={Resume} />
       <Stack.Screen name='RatingView' component={RatingView} />
       <Stack.Screen name='AppLanguage' component={AppLanguage} />
-      <Stack.Screen name='Paymetn' component={Paymetn} />
+      <Stack.Screen name='Payment' component={Payment} />
       <Stack.Screen name='AllLessonsView' component={AllLessonsView} />
       <Stack.Screen name='SubjectsView' component={SubjectsView} />
       <Stack.Screen name='AccountAfterLogin' component={UserAccount} />
@@ -69,12 +78,6 @@ function MyStack() {
       <Stack.Screen name='UnsubscribeView' component={UnsubscribeView} />
       <Stack.Screen name='CheckOut' component={CheckOut} />
       <Stack.Screen name='SlotsAvailable' component={SlotsAvailable} />
-      
-     
-      
-      
-      
-
     </Stack.Navigator>
   );
 }

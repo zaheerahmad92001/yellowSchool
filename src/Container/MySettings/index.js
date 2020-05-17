@@ -149,12 +149,16 @@ export default class MySettings extends Component {
         // })
         this.props.navigation.navigate('MySettings')
     }
+    _Done=()=>{
+        this.props.navigation.pop()
+    }
     render() {
         return (
             <SafeAreaView style={styles.container}>
                 <_AppHeader
                     leftText={'Done'}
                     headerText={'MySETTINGS'}
+                    leftPress={()=>this._Done()}
                 />
                 <ScrollView horizontal={true}
                     showsHorizontalScrollIndicator={false}

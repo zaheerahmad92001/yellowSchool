@@ -1,14 +1,16 @@
 import React,{Component} from 'react';
-import { StyleSheet ,View,Text,Image,Dimensions, SafeAreaView } from 'react-native';
+import { StyleSheet ,View,Text,Image,Dimensions, SafeAreaView,BackHandler  } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import _Navigation from '../../Navigation';
 import Account from '../Account';
+import Login from '../AuthFlow/Login';
 import { White, _Yellow, Black } from '../../Colors';
 import styles from './styles'
 import _Button from '../../Component/_Button';
 import { RFValue } from 'react-native-responsive-fontsize';
 import AppLanguage from '../AppLanguages';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 const slides = [
     {
@@ -18,7 +20,7 @@ const slides = [
       text2:'tutors and native speakers',
       account:'Have an account ? login',
       buttonText:'Get started',
-      navigateTo:'',
+     // navigateTo:'',
       // image: require('./assets/1.jpg'),
       backgroundColor: '#59b2ab',
     },
@@ -29,7 +31,7 @@ const slides = [
       text2:'to chose the perfect tutor',
       account:'Have an account ? login',
       buttonText:'Get started',
-      navigateTo:'',
+    //  navigateTo:'',
       //image: require('./assets/2.jpg'),
       backgroundColor: '#febe29',
     },
@@ -40,7 +42,7 @@ const slides = [
       text2:'notifications about your lessons',
       account:'Have an account ? login',
       buttonText:'Get started',
-      navigateTo:'',
+     // navigateTo:'',
       //image: require('./assets/3.jpg'),
       backgroundColor: '#22bcb5',
     }
@@ -48,10 +50,25 @@ const slides = [
 export default class _AppInfo extends Component{
     constructor(props){
         super(props);
+        //this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     this.state={
-        showRealApp: false
+        showRealApp: false,
+        showLogin:false,
     }
     }
+  //   componentWillMount() {
+  //     BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+  // }
+
+  // componentWillUnmount() {
+  //     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+  // }
+
+  // handleBackButtonClick() {
+  //     //this.props.navigation.goBack(null);
+  //     BackHandler.exitApp();
+  //     return true;
+  // }
     _renderItem = ({ item }) => {
         return (
           <View style={{backgroundColor:White,flex:1}}>
@@ -69,13 +86,18 @@ export default class _AppInfo extends Component{
                </View>
            <View style={{marginVertical:RFValue(25),justifyContent:'center',alignItems:'center'}}>
              <_Button
-             //onPress={()=>this.navigation(item.navigateTo)}
+            // onPress={()=>this.navigation(item.navigateTo)}
+            onPress={()=>this.getStarted() }
              styles={{backgroundColor:White, width:screenWidth*0.75,justifyContent:'center',alignItems:'center'}}
              textStyle={{color:_Yellow,}}
              textButton={item.buttonText}
              />
            </View>
+          <TouchableOpacity 
+          onPress={()=>this.hasAccount()}
+          >
         <Text style={[styles.account]}>{item.account}</Text>
+        </TouchableOpacity>
             </View>
           </View>
         );
@@ -88,21 +110,38 @@ export default class _AppInfo extends Component{
               <Text>ala</Text>
           </View>
       }
+
+      getStarted=()=>{
+        this.setState({showRealApp:true})
+      }
+      hasAccount=()=>{
+        this.setState({showLogin:true})
+      }
       render(){
         if (this.state.showRealApp) {
             return (
               <SafeAreaProvider>
-            <Account navigation={this.props.navigation}/>
+            <Account 
+            navigation={this.props.navigation}
+            />
             </SafeAreaProvider>
             )
-          } else {
+          }else if(this.state.showLogin){
+            return (
+              <SafeAreaProvider>
+            <Login
+            navigation={this.props.navigation}
+            />
+            </SafeAreaProvider>
+            )
+          }else {
             return(
             <SafeAreaProvider>
             <AppIntroSlider renderItem={this._renderItem}
              data={slides} 
              onDone={this._onDone}
              bottomButton={false}
-             doneLabel={'Get started'}
+             doneLabel={''}
              nextLabel={''}
               dotStyle={{
                   justifyContent:'center',

@@ -13,7 +13,7 @@ export default StyleSheet.create({
     },
     contentSecond:{
         marginHorizontal:RFValue(20),
-        marginTop:RFValue(20),
+        marginTop:RFValue(30),
         flex:9,
     },
     settingStyle:{

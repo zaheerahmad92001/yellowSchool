@@ -102,13 +102,20 @@ this.props.navigation.pop()
                  
                  { this.state.todayClicked ?
                  <TodaySlots
+                 navigation={this.props.navigation}
                  /> :
                  this.state.tomorrowClicked ?
-                 <TomorrowSlots/>:
+                 <TomorrowSlots
+                 navigation={this.props.navigation}
+                 />:
                  this.state.Day1Clicked ?
-                 <SpecificDayOneSlots/>:
+                 <SpecificDayOneSlots
+                 navigation={this.props.navigation}
+                 />:
                  this.state.Day2Clicked ?
-                 <SpecificDayTwoSlots/>:null
+                 <SpecificDayTwoSlots
+                 navigation={this.props.navigation}
+                 />:null
                  }
                 
 {/* <View style={styles.noSlotAvailable}>

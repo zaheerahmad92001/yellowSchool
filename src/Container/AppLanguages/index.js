@@ -33,7 +33,7 @@ export default class AppLanguage extends Component{
         }
     }
     goBack=()=>{
-  //this.props.navigation.navigate('SignUp')
+  this.props.navigation.pop()
     }
     _Search=()=>{
         
@@ -75,6 +75,7 @@ export default class AppLanguage extends Component{
              leftText={'Back'}
              leftTextStyle={{color:_Yellow}}
              leftPress={()=>this.goBack()}
+             leftIconPress={()=>this.goBack()}
              />
            <View style={styles.innerView}>
             <Text style={styles._textStyle}>what do you want to learn ?</Text>

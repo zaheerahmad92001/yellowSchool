@@ -40,7 +40,7 @@ export default class CheckOut extends Component {
         })
     }
     _Continue = () => {
-    this.props.navigation.navigate('Paymetn')
+    this.props.navigation.navigate('Payment')
     }
     render() {
         return (

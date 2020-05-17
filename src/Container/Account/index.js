@@ -181,6 +181,9 @@ export default class Account extends Component {
         })
         this.props.navigation.navigate('MySettings')
     }
+    _onPress=()=>{
+        this.props.navigation.navigate('AppLanguage')
+    }
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -208,42 +211,53 @@ export default class Account extends Component {
                         />
                     </View>
                     <View style={styles.contentSecond}>
-                        <View style={styles.settingStyle}>
+                        <TouchableOpacity style={styles.settingStyle}>
                             <Text style={styles.Heading}>Support center</Text>
                             <Icon
                                 name={'questioncircleo'}
                                 type={'AntDesign'}
                                 style={{ fontSize: RFValue(14), color: _Yellow }}
                             />
-                        </View>
+                        </TouchableOpacity>
                         <View style={styles.bottomBorder}></View>
-                        <View style={styles.settingStyle}>
+                        <TouchableOpacity style={styles.settingStyle}>
                             <Text style={styles.Heading}>Report problem</Text>
                             <Icon
                                 name={'exclamation'}
                                 type={'EvilIcons'}
                                 style={{ fontSize: RFValue(20), color: _Yellow }}
                             />
-                        </View>
+                        </TouchableOpacity>
                         <View style={styles.bottomBorder}></View>
-                        <View style={styles.settingStyle}>
+                        <TouchableOpacity style={styles.settingStyle}>
                             <Text style={styles.Heading}>Privacy policy</Text>
                             <Icon
                                 name={'lock'}
                                 type={'EvilIcons'}
                                 style={{ fontSize: RFValue(23), color: _Yellow }}
                             />
-                        </View>
+                        </TouchableOpacity>
                         <View style={styles.bottomBorder}></View>
 
-                        <View style={styles.settingStyle}>
+                        <TouchableOpacity style={styles.settingStyle}>
                             <Text style={styles.Heading}>Terms of service</Text>
                             <Icon
                                 name={'file1'}
                                 type={'AntDesign'}
                                 style={{ fontSize: RFValue(15), color: _Yellow }}
                             />
-                        </View>
+                        </TouchableOpacity>
+                        <View style={[styles.bottomBorder]}></View>
+                        <TouchableOpacity style={styles.settingStyle}
+                         onPress={this._onPress}
+                        >
+                            <Text style={styles.Heading}>Languages</Text>
+                            <Icon
+                                name={'language'}
+                                type={'MaterialIcons'}
+                                style={{ fontSize: RFValue(15), color: _Yellow }}
+                            />
+                        </TouchableOpacity>
                         <View style={[styles.bottomBorder]}></View>
                         <Text style={styles.versionText}>Version 13.9</Text>
                     </View>

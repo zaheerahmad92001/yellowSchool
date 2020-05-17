@@ -17,7 +17,7 @@ export default class SignUp extends Component {
         }
     }
     _Done=()=>{
-        
+      this.props.navigation.pop()  
     }
     render(){
         return(

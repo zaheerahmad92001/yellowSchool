@@ -18,10 +18,14 @@ export default class SpecificDayOneSlots extends Component{
             slotsAvailable:true
         }
     }
+    _onPress=()=>{
+     this.props.navigation.navigate('CheckOut')
+    }
    renderTime=({item})=>{
        return(
            <_TimeZone
            item={item}
+           _onPress={this._onPress}
            />
        )
    }
@@ -34,6 +38,7 @@ export default class SpecificDayOneSlots extends Component{
                 {'Your local time zone'}
              </Text>
              <FlatList
+             style={{marginTop:RFValue(10)}}
              data={time}
              keyExtractor={(item)=>{(item.id)}}
              renderItem={this.renderTime}
