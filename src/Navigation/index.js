@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import Splash from '../../src/Container/Splash';
 import _AppInfo from '../Container/AppintroSlider'
 import Account from '../../src/Container/Account';
@@ -29,9 +31,66 @@ import RatingView from '../Container/Rating';
 import AllLessonsView from '../Container/AllLessons';
 import Payment from '../Container/Payment';
 
-const Stack = createStackNavigator();
-const LoadingStack = createStackNavigator();
-const SliderStack = createStackNavigator();
+const SplashNavigator = createStackNavigator({
+  splash: Splash
+}, {
+  initialRouteName: 'splash',
+  headerMode: 'none'
+});
+
+const AppIntroNavgator = createStackNavigator({
+  _AppInfo:_AppInfo
+},{
+  initialRouteName:'_AppInfo',
+  headerMode:'none',
+}); 
+const AppNavigator = createStackNavigator({
+  Account:Account,
+  Login:Login,
+  SignUp:SignUp,
+  ForgetPassword:ForgetPassword,
+  LessonIntroView:LessonIntroView,
+  MessageIntroView:MessageIntroView,
+  MyTutorList:MyTutorList,
+  MySettings:MySettings,
+  SearchView:SearchView,
+  SingleTutor:SingleTutor,
+  AllMessages:AllMessages,
+  MessageView:MessageView,
+  StudentAge:StudentAge,
+  LevelOfStudents:LevelOfStudents,
+  Resume:Resume,
+  RatingView:RatingView,
+  AppLanguage:AppLanguage,
+  Payment:Payment,
+  AllLessonsView:AllLessonsView,
+  SubjectsView:SubjectsView,
+  AccountAfterLogin:UserAccount,
+  FilterView:FilterView,
+  UnsubscribeView:UnsubscribeView,
+  CheckOut:CheckOut,
+  SlotsAvailable:SlotsAvailable,
+},{
+  initialRouteName:'Account',
+  headerMode:'none',
+})
+const RootNavigator = createSwitchNavigator({
+  SplashNavigator,
+  AppIntroNavgator,
+  AppNavigator
+}, {
+  initialRouteName: 'SplashNavigator',
+  headerMode: 'none',
+  navigationOptions: {
+    headerTransparent: true
+  }
+})
+export default createAppContainer(RootNavigator)
+
+
+// const Stack = createStackNavigator();
+// const LoadingStack = createStackNavigator();
+// const SliderStack = createStackNavigator();
 
 // function Splashscreen(){
 //   return(
@@ -48,47 +107,47 @@ const SliderStack = createStackNavigator();
 //     </SliderStack.Navigator>
 //   )
 // }
-function MyStack() {
-  return (
-    <Stack.Navigator initialRouteName="splash" headerMode="none">
-       <Stack.Screen name ="splash" component={Splash}/>
-       <Stack.Screen name ="_AppInfo" component={_AppInfo}/>
-      <Stack.Screen name="Account" component={Account} />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
-      <Stack.Screen name='LessonIntroView' component={LessonIntroView} />
-      <Stack.Screen name='MessageIntroView' component={MessageIntroView} />
-      <Stack.Screen name='MyTutorList' component={MyTutorList} />
-      <Stack.Screen name='MySettings' component={MySettings} />
-      <Stack.Screen name='SearchView' component={SearchView} />
-      <Stack.Screen name='SingleTutor' component={SingleTutor} />
-      <Stack.Screen name='AllMessages' component={AllMessages} />
-      <Stack.Screen name='MessageView' component={MessageView} />
-      <Stack.Screen name='StudentAge' component={StudentAge} />
-      <Stack.Screen name='LevelOfStudents' component={LevelOfStudents} />
-      <Stack.Screen name='Resume' component={Resume} />
-      <Stack.Screen name='RatingView' component={RatingView} />
-      <Stack.Screen name='AppLanguage' component={AppLanguage} />
-      <Stack.Screen name='Payment' component={Payment} />
-      <Stack.Screen name='AllLessonsView' component={AllLessonsView} />
-      <Stack.Screen name='SubjectsView' component={SubjectsView} />
-      <Stack.Screen name='AccountAfterLogin' component={UserAccount} />
-      <Stack.Screen name='FilterView' component={FilterView} />
-      <Stack.Screen name='UnsubscribeView' component={UnsubscribeView} />
-      <Stack.Screen name='CheckOut' component={CheckOut} />
-      <Stack.Screen name='SlotsAvailable' component={SlotsAvailable} />
-    </Stack.Navigator>
-  );
-}
-export default class _Navigation extends React.Component {
-  render() {
-    return (
+// function MyStack() {
+//   return (
+//     <Stack.Navigator initialRouteName="splash" headerMode="none">
+//        <Stack.Screen name ="splash" component={Splash}/>
+//        <Stack.Screen name ="_AppInfo" component={_AppInfo}/>
+//       <Stack.Screen name="Account" component={Account} />
+//       <Stack.Screen name="Login" component={Login} />
+//       <Stack.Screen name="SignUp" component={SignUp} />
+//       <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
+//       <Stack.Screen name='LessonIntroView' component={LessonIntroView} />
+//       <Stack.Screen name='MessageIntroView' component={MessageIntroView} />
+//       <Stack.Screen name='MyTutorList' component={MyTutorList} />
+//       <Stack.Screen name='MySettings' component={MySettings} />
+//       <Stack.Screen name='SearchView' component={SearchView} />
+//       <Stack.Screen name='SingleTutor' component={SingleTutor} />
+//       <Stack.Screen name='AllMessages' component={AllMessages} />
+//       <Stack.Screen name='MessageView' component={MessageView} />
+//       <Stack.Screen name='StudentAge' component={StudentAge} />
+//       <Stack.Screen name='LevelOfStudents' component={LevelOfStudents} />
+//       <Stack.Screen name='Resume' component={Resume} />
+//       <Stack.Screen name='RatingView' component={RatingView}/>
+//       <Stack.Screen name='AppLanguage' component={AppLanguage}/>
+//       <Stack.Screen name='Payment' component={Payment} />
+//       <Stack.Screen name='AllLessonsView' component={AllLessonsView} />
+//       <Stack.Screen name='SubjectsView' component={SubjectsView} />
+//       <Stack.Screen name='AccountAfterLogin' component={UserAccount} />
+//       <Stack.Screen name='FilterView' component={FilterView} />
+//       <Stack.Screen name='UnsubscribeView' component={UnsubscribeView} />
+//       <Stack.Screen name='CheckOut' component={CheckOut} />
+//       <Stack.Screen name='SlotsAvailable' component={SlotsAvailable} />
+//     </Stack.Navigator>
+//   );
+// }
+// export default class _Navigation extends React.Component {
+//   render() {
+//     return (
 
-      <NavigationContainer>
-        <MyStack />
-      </NavigationContainer>
-    );
-  }
+//       <NavigationContainer>
+//         <MyStack />
+//       </NavigationContainer>
+//     );
+//   }
 
-}
+// }
