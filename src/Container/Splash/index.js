@@ -15,8 +15,11 @@ export default class Splash extends Component{
         AsyncStorage.getItem('lang').then((value) => {
             let data = JSON.parse(value);
             console.log('selected language',data)
+            if(data){
             I18n.locale=data
-           
+            }else{
+                I18n.locale='eng'
+            }
         })
     }
     componentDidMount(){
