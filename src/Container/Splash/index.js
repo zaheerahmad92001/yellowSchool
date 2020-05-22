@@ -7,9 +7,17 @@ import {
 }from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { White } from '../../Colors';
+import AsyncStorage from '@react-native-community/async-storage';
+import I18n from '../../Component/i18n';
 export default class Splash extends Component{
     constructor(props){
         super(props)
+        AsyncStorage.getItem('lang').then((value) => {
+            let data = JSON.parse(value);
+            console.log('selected language',data)
+            I18n.locale=data
+           
+        })
     }
     componentDidMount(){
         setTimeout(()=>{

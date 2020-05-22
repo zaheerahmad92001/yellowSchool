@@ -8,17 +8,22 @@ import { White, BorderBottom, Black, lightGrey, _Yellow } from '../Colors';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Icon } from 'native-base';
 import _Button from './_Button';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 const _BottomNavigation = (props) => {
     return (
         <View style={styles.BottomNavigation}>
             {props.filter ?
                 <View style={{ flex: 1.5, alignItems: 'center', justifyContent: 'center' }}>
+                    <TouchableOpacity 
+                    onPress={props.handlePress}
+                    >
                     <View style={styles.ViewersView}>
                         <Text style={styles.ViewText}>{'View'}</Text>
                         <Text style={[styles.ViewText,{marginLeft:RFValue(4)}]}>{props.totalViewer}</Text>
                         <Text style={[styles.ViewText,{marginLeft:RFValue(4)}]}>tutors</Text>
                     </View>
+                    </TouchableOpacity>
                 </View>
                 :
                 <View style={{ flex: 1.5, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: "center" }}>
@@ -95,7 +100,7 @@ const styles = StyleSheet.create({
         fontWeight: '500'
     },
     BottomNavigation: {
-        flex: 1.5,
+        flex: 1.3,
         backgroundColor: _Yellow,
         borderTopRightRadius: RFValue(32),
         borderTopLeftRadius: RFValue(32),
@@ -117,7 +122,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: screenWidth * 0.85,
         height: screenHeight * 0.06,
-        marginBottom: RFValue(10)
+        //marginBottom: RFValue(10)
     },
     ViewText: {
         color: _Yellow,

@@ -15,6 +15,7 @@ import { Modalize } from 'react-native-modalize';
 import _BottomSheet from '../../Component/_bottomSheet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import _BottomNavigation from '../../Component/bottomNavigation';
+import {translate}from '../../Component/i18n';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
 export default class Account extends Component {
@@ -190,7 +191,7 @@ export default class Account extends Component {
                 <_AppHeader
                     styles={{ backgroundColor: White, }}
                     leftTextStyle={{ color: Black, fontSize: RFValue(16), }}
-                    leftText={'Account'}
+                    leftText={translate('constants.account')}
                     leftPress={() => this.goBack()}
                 />
                 <View style={styles.content}>
@@ -200,19 +201,19 @@ export default class Account extends Component {
                             styles={{ width: screenWidth * 0.35, }}
                             textStyle={{ fontSize: RFValue(12), color: Black }}
                             IconNmae={'login'}
-                            textButton={'Login'}
+                            textButton={translate('constants.login')}
                         />
                         <_Button
                             onPress={() => this.callSignUpSheet()}
                             styles={{ width: screenWidth * 0.35, }}
                             textStyle={{ fontSize: RFValue(12), color: Black }}
                             IconNmae={'account'}
-                            textButton={'SignUp'}
+                            textButton={translate('constants.signUp')}
                         />
                     </View>
                     <View style={styles.contentSecond}>
                         <TouchableOpacity style={styles.settingStyle}>
-                            <Text style={styles.Heading}>Support center</Text>
+                         <Text style={styles.Heading}>{translate('constants.supportCenter')}</Text>
                             <Icon
                                 name={'questioncircleo'}
                                 type={'AntDesign'}
@@ -221,7 +222,7 @@ export default class Account extends Component {
                         </TouchableOpacity>
                         <View style={styles.bottomBorder}></View>
                         <TouchableOpacity style={styles.settingStyle}>
-                            <Text style={styles.Heading}>Report problem</Text>
+                        <Text style={styles.Heading}>{translate('constants.reportProblem')}</Text>
                             <Icon
                                 name={'exclamation'}
                                 type={'EvilIcons'}
@@ -230,7 +231,7 @@ export default class Account extends Component {
                         </TouchableOpacity>
                         <View style={styles.bottomBorder}></View>
                         <TouchableOpacity style={styles.settingStyle}>
-                            <Text style={styles.Heading}>Privacy policy</Text>
+                        <Text style={styles.Heading}>{translate('constants.privacyPolicy')}</Text>
                             <Icon
                                 name={'lock'}
                                 type={'EvilIcons'}
@@ -240,7 +241,7 @@ export default class Account extends Component {
                         <View style={styles.bottomBorder}></View>
 
                         <TouchableOpacity style={styles.settingStyle}>
-                            <Text style={styles.Heading}>Terms of service</Text>
+        <Text style={styles.Heading}>{translate('constants.termsPolicy')}</Text>
                             <Icon
                                 name={'file1'}
                                 type={'AntDesign'}
@@ -251,7 +252,7 @@ export default class Account extends Component {
                         <TouchableOpacity style={styles.settingStyle}
                          onPress={this._onPress}
                         >
-                            <Text style={styles.Heading}>Languages</Text>
+                            <Text style={styles.Heading}>{translate('constants.languages')}</Text>
                             <Icon
                                 name={'language'}
                                 type={'MaterialIcons'}
@@ -259,7 +260,7 @@ export default class Account extends Component {
                             />
                         </TouchableOpacity>
                         <View style={[styles.bottomBorder]}></View>
-                        <Text style={styles.versionText}>Version 13.9</Text>
+                        <Text style={styles.versionText}>{translate('constants.version')}</Text>
                     </View>
                     </View>
                     

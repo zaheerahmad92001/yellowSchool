@@ -6,7 +6,8 @@ import {
     StyleSheet,
     StatusBar,
     Platform,
-    SafeAreaView
+    SafeAreaView,
+    Picker
 } from 'react-native';
 import { headerColor, White, _Yellow, Black } from '../../Colors';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -17,16 +18,16 @@ import _BottomNavigation from '../../Component/bottomNavigation';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 import styles from './styles'
 import _TutorsList from '../../Component/TutorsList';
-const language = [
-    { label: 'English language', value: 'English language' },
-    { label: 'Spanish language', value: 'Spanish language' },
-    { label: 'French  language', value: 'French  language' },
-    { label: 'Japanese language', value: 'Japanese language' },
-    { label: 'German language', value: 'German language' },
-    { label: 'Russian language', value: 'Russian language' },
-    { label: 'Chinies language', value: 'Chinies language' },
-    { label: 'Italian language', value: 'Italian language' },
-]
+// const language = [
+//     { label: 'English language', value: 'English language' },
+//     { label: 'Spanish language', value: 'Spanish language' },
+//     { label: 'French  language', value: 'French  language' },
+//     { label: 'Japanese language', value: 'Japanese language' },
+//     { label: 'German language', value: 'German language' },
+//     { label: 'Russian language', value: 'Russian language' },
+//     { label: 'Chinies language', value: 'Chinies language' },
+//     { label: 'Italian language', value: 'Italian language' },
+// ]
 const tutorsList = [
     { name: 'Methew T.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $12/H' },
     { name: 'Methew T.', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $12/H' },
@@ -96,12 +97,17 @@ export default class SearchView extends Component {
     renderTutorList = ({ item }) => {
         return (
             <_TutorsList
-              item={item}
-              onPress={()=>this.props.navigation.navigate('SingleTutor')}  
+                item={item}
+                onPress={() => this.props.navigation.navigate('SingleTutor')}
             />
 
 
         )
+    }
+ setSelectedValue=(value)=>{
+  this.setState({
+    selectedValue:value
+  })
     }
     render() {
         const placeholder = {
@@ -116,7 +122,26 @@ export default class SearchView extends Component {
                 <View style={styles.header}>
                     <StatusBar backgroundColor={_Yellow} barStyle={'light-content'} />
                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end', bottom: RFValue(5) }}>
-                        <View style={[styles.inputView, { paddingVertical: Platform.OS === 'ios' ? 10 : 5 }]}>
+                    <View style={[styles.inputView, { paddingVertical: Platform.OS === 'ios' ? 10 : 5 }]}>
+                        <Picker
+                            mode={'dropdown'}
+                            selectedValue={this.state.selectedValue}
+                            style={{flex:0.7,marginLeft:RFValue(10), }}
+                            onValueChange={(itemValue, itemIndex) => this.setSelectedValue(itemValue)}
+                           >
+                            <Picker.Item label="Select language" value="" />
+                            <Picker.Item label="English language" value="English language" />
+                            <Picker.Item label="Chinies language" value="Chinies language" />
+                            {/* <Picker.Item label="Spanish language" value="Spanish language" />
+                            <Picker.Item label="French  language" value="French  language" />
+                            <Picker.Item label="Japanese language" value="Japanese language" />
+                            <Picker.Item label="German language" value="German language" />
+                            <Picker.Item label="Russian language" value="Russian language" /> */}
+                            
+                            {/* <Picker.Item label="Italian language" value="Italian language" /> */}
+                        </Picker>
+                        </View>
+                        {/* <View style={[styles.inputView, { paddingVertical: Platform.OS === 'ios' ? 10 : 5 }]}>
                             <RNPickerSelect
                                 useNativeAndroidPickerStyle={false}
                                 placeholder={placeholder}
@@ -125,15 +150,17 @@ export default class SearchView extends Component {
                                         fontSize: RFValue(16),
                                         paddingHorizontal: 10,
                                         borderRadius: 10,
-                                        color: Black,
+                                        color:Black,
+                                       // backgroundColor:'red'
                                     },
                                     inputIOS: {
                                         fontSize: RFValue(16),
-                                        paddingHorizontal: 10,
+                                        paddingHorizontal:10,
                                         paddingVertical: 5,
                                         borderRadius: 10,
                                         placeholderTextColor: Black,
                                         color: Black,
+                                       // backgroundColor:'red'
                                     },
                                 }}
                                 onValueChange={(value) => this.setState({
@@ -154,7 +181,7 @@ export default class SearchView extends Component {
                                     this.inputRefs.language = ref;
                                 }}
                             />
-                        </View>
+                        </View> */}
                     </View>
                 </View>
                 <View style={styles.content}>
@@ -166,12 +193,16 @@ export default class SearchView extends Component {
                         showsVerticalScrollIndicator={false}
                     />
                     <View style={styles.filters}>
+                        <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}}
+                        onPress={()=>this.props.navigation.navigate('FilterView')}
+                        >
                         <Icon
                             name={'filter-list'}
                             type={'MaterialIcons'}
                             style={{ fontSize: RFValue(20), color: Black }}
                         />
                         <Text style={styles.filteText}>Filters</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{ flex: 1 }}>
