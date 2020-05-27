@@ -13,12 +13,35 @@ export default class Login extends Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+
+            user_name: '',
+            token: '',
+            profile_pic: '',
         }
     }
-    goBack=()=>{
+    goBack = () => {
         this.props.navigation.pop()
     }
+
+    get_Response_Info = (error, result) => {
+        if (error) {
+          //Alert for the Error
+          Alert.alert('Error fetching data: ' + error.toString());
+        } else {
+          //response alert
+          alert(JSON.stringify(result));
+          this.setState({ user_name: 'Welcome' + ' ' + result.name });
+          this.setState({ token: 'User Token: ' + ' ' + result.id });
+          this.setState({ profile_pic: result.picture.data.url });
+        }
+      };
+    
+      onLogout = () => {
+        //Clear the state after logout
+        this.setState({ user_name: null, token: null, profile_pic: null });
+      };
+    
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -26,7 +49,7 @@ export default class Login extends Component {
                     //leftIcon={'menu'}
                     leftText={'Cancel'}
                     headerText={'LOGIN'}
-                    leftPress={()=>this.goBack()}
+                    leftPress={() => this.goBack()}
                 // leftText={'test'}
                 />
                 <View style={styles.content}>
@@ -48,15 +71,15 @@ export default class Login extends Component {
                     </View>
                     <View style={styles.ButtonView}>
                         <_Button
-                        styles={{height:screenHeight*0.06,width:screenWidth*0.9}}
+                            styles={{ height: screenHeight * 0.06, width: screenWidth * 0.9 }}
                             textButton={'Login'}
                         ></_Button>
                     </View>
                     <View style={styles.forgetpass}>
-                     <TouchableOpacity
-                     onPress={()=>this.props.navigation.navigate('ForgetPassword')}>
-                         <Text style={styles.forgetText}>Forget your password ?</Text>
-                     </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => this.props.navigation.navigate('ForgetPassword')}>
+                            <Text style={styles.forgetText}>Forget your password ?</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
 

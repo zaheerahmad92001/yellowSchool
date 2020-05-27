@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1082030082725-570n5l1e0uphmp9epdjklji1r9js78up.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1082030082725-570n5l1e0uphmp9epdjklji1r9js78up</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1082030082725-7dnnu4a2qv9309166160pm3mu0evr4a1.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD18eWwrGnNZ7dPWlFroFSQVwGmBwcaclA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1082030082725</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.yellow-school</string>
+	<key>PROJECT_ID</key>
+	<string>yellowschool-6a014</string>
+	<key>STORAGE_BUCKET</key>
+	<string>yellowschool-6a014.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1082030082725:ios:c4ddc5a22b8d17b6a25b4c</string>
+	<key>DATABASE_URL</key>
+	<string>https://yellowschool-6a014.firebaseio.com</string>
+</dict>
+</plist>

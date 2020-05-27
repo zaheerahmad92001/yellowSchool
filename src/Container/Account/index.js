@@ -4,7 +4,23 @@ import {
     Text,
     Dimensions,
     SafeAreaView,
+    Button
 } from 'react-native';
+import {
+    LoginButton,
+    AccessToken,
+    GraphRequest,
+    GraphRequestManager,
+} from 'react-native-fbsdk';
+import { LoginManager } from 'react-native-fbsdk';
+
+import {
+    GoogleSignin,
+    GoogleSigninButton,
+    statusCodes,
+} from '@react-native-community/google-signin';
+
+
 import styles from './styles'
 import _AppHeader from '../../Component/AppHeader';
 import { White, Black, _Yellow, lightGrey } from '../../Colors';
@@ -15,8 +31,9 @@ import { Modalize } from 'react-native-modalize';
 import _BottomSheet from '../../Component/_bottomSheet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import _BottomNavigation from '../../Component/bottomNavigation';
-import {translate}from '../../Component/i18n';
+import { translate } from '../../Component/i18n';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+import firebase from '@react-native-firebase/app'
 
 export default class Account extends Component {
     loginSheet = React.createRef();
@@ -29,8 +46,10 @@ export default class Account extends Component {
             changeSearchIconColor: false,
             changeMessageIconColor: false,
             changeUserIconColor: false,
-            changeSettingIconColor: false
+            changeSettingIconColor: false,
 
+            userInfo: null,
+      gettingLoginStatus: true,
         }
     }
 
@@ -90,17 +109,105 @@ export default class Account extends Component {
         }
 
     }
-    // callLoginSheet=()=>{
-    //     const loginSheet = this.loginSheet.current;
-    //     this.setState({showSignUpSheet:false})
-    //     if(this.signUpSheet.current){
-    //         this.signUpSheet.current.close()
-    //         if(loginSheet){
-    //             this.setState({showBottomSheet:true})
-    //             loginSheet.open()
-    //         }
+// google signIn
+
+    // componentDidMount() {
+    //     //initial configuration
+    //     GoogleSignin.configure({
+    //       //It is mandatory to call this method before attempting to call signIn()
+    //       scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+    //       // Repleace with your webClientId generated from Firebase console
+    //       webClientId: '1082030082725-g6cd8b5eiojs24f9j4uterq6ab3kjvvb.apps.googleusercontent.com',
+    //     });
+    //     //Check if user is already signed in
+    //     this._isSignedIn();
+    //   }
+    
+    //   _isSignedIn = async () => {
+    //     const isSignedIn = await GoogleSignin.isSignedIn();
+    //     if (isSignedIn) {
+    //       alert('User is already signed in');
+    //       //Get the User details as user is already signed in
+    //       this._getCurrentUserInfo();
+    //     } else {
+    //       //alert("Please Login");
+    //       console.log('Please Login');
     //     }
-    // }
+    //     this.setState({ gettingLoginStatus: false });
+    //   };
+    
+    //   _getCurrentUserInfo = async () => {
+    //     try {
+    //       const userInfo = await GoogleSignin.signInSilently();
+    //       console.log('User Info --> ', userInfo);
+    //       this.setState({ userInfo: userInfo });
+    //     } catch (error) {
+    //       if (error.code === statusCodes.SIGN_IN_REQUIRED) {
+    //         alert('User has not signed in yet');
+    //         console.log('User has not signed in yet');
+    //       } else {
+    //         alert("Something went wrong. Unable to get user's info");
+    //         console.log("Something went wrong. Unable to get user's info");
+    //       }
+    //     }
+    //   };
+    
+    //   _signIn = async () => {
+    //     //Prompts a modal to let the user sign in into your application.
+    //     try {
+    //       await GoogleSignin.hasPlayServices({
+    //         //Check if device has Google Play Services installed.
+    //         //Always resolves to true on iOS.
+    //         showPlayServicesUpdateDialog: true,
+    //       });
+    //       const userInfo = await GoogleSignin.signIn();
+    //       console.log('User Info --> ', userInfo);
+    //       this.setState({ userInfo: userInfo });
+    //     } catch (error) {
+    //       console.log('Message', error.message);
+    //       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+    //         console.log('User Cancelled the Login Flow');
+    //       } else if (error.code === statusCodes.IN_PROGRESS) {
+    //         console.log('Signing In');
+    //       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+    //         console.log('Play Services Not Available or Outdated');
+    //       } else {
+    //         console.log('Some Other Error Happened');
+    //       }
+    //     }
+    //   };
+    
+    //   _signOut = async () => {
+    //     //Remove user session from the device.
+    //     try {
+    //       await GoogleSignin.revokeAccess();
+    //       await GoogleSignin.signOut();
+    //       this.setState({ userInfo: null }); // Remove the user from your app's state as well
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    //   };
+
+    // Firebase 
+
+    // handleFacebookLogin () {
+    //     LoginManager.logInWithPermissions(['public_profile', 'email', 'user_friends']).then(
+    //       function (result) {
+    //         if (result.isCancelled) {
+    //           console.log('Login cancelled')
+    //         } else {
+    //             console.log('mein hn na ah', result.grantedPermissions.email)
+    //           //console.log('Login success with permissions: ' + result.grantedPermissions.toString())
+    //         }
+    //       },
+    //       function (error) {
+    //         console.log('Login fail with error: ' + error)
+    //       }
+    //     )
+    //   }
+
+
+
     renderBottomSheet = () => {
         return (
             <_BottomSheet
@@ -182,7 +289,7 @@ export default class Account extends Component {
         })
         this.props.navigation.navigate('MySettings')
     }
-    _onPress=()=>{
+    _onPress = () => {
         this.props.navigation.navigate('AppLanguage')
     }
     render() {
@@ -213,7 +320,7 @@ export default class Account extends Component {
                     </View>
                     <View style={styles.contentSecond}>
                         <TouchableOpacity style={styles.settingStyle}>
-                         <Text style={styles.Heading}>{translate('constants.supportCenter')}</Text>
+                            <Text style={styles.Heading}>{translate('constants.supportCenter')}</Text>
                             <Icon
                                 name={'questioncircleo'}
                                 type={'AntDesign'}
@@ -222,7 +329,7 @@ export default class Account extends Component {
                         </TouchableOpacity>
                         <View style={styles.bottomBorder}></View>
                         <TouchableOpacity style={styles.settingStyle}>
-                        <Text style={styles.Heading}>{translate('constants.reportProblem')}</Text>
+                            <Text style={styles.Heading}>{translate('constants.reportProblem')}</Text>
                             <Icon
                                 name={'exclamation'}
                                 type={'EvilIcons'}
@@ -231,7 +338,7 @@ export default class Account extends Component {
                         </TouchableOpacity>
                         <View style={styles.bottomBorder}></View>
                         <TouchableOpacity style={styles.settingStyle}>
-                        <Text style={styles.Heading}>{translate('constants.privacyPolicy')}</Text>
+                            <Text style={styles.Heading}>{translate('constants.privacyPolicy')}</Text>
                             <Icon
                                 name={'lock'}
                                 type={'EvilIcons'}
@@ -241,7 +348,7 @@ export default class Account extends Component {
                         <View style={styles.bottomBorder}></View>
 
                         <TouchableOpacity style={styles.settingStyle}>
-        <Text style={styles.Heading}>{translate('constants.termsPolicy')}</Text>
+                            <Text style={styles.Heading}>{translate('constants.termsPolicy')}</Text>
                             <Icon
                                 name={'file1'}
                                 type={'AntDesign'}
@@ -250,7 +357,7 @@ export default class Account extends Component {
                         </TouchableOpacity>
                         <View style={[styles.bottomBorder]}></View>
                         <TouchableOpacity style={styles.settingStyle}
-                         onPress={this._onPress}
+                            onPress={this._onPress}
                         >
                             <Text style={styles.Heading}>{translate('constants.languages')}</Text>
                             <Icon
@@ -262,9 +369,15 @@ export default class Account extends Component {
                         <View style={[styles.bottomBorder]}></View>
                         <Text style={styles.versionText}>{translate('constants.version')}</Text>
                     </View>
-                    </View>
-                    
-                    <View style={{flex:1.15}}>
+                 {/* <GoogleSigninButton
+              style={{ width: 312, height: 48 }}
+              size={GoogleSigninButton.Size.Wide}
+              color={GoogleSigninButton.Color.Light}
+              onPress={this._signIn}
+            /> */}
+                </View>
+
+                <View style={{ flex: 1.15 }}>
                     <_BottomNavigation
                         SearchClick={() => this._Search()}
                         changeSearchIconColor={this.state.changeSearchIconColor}
@@ -276,7 +389,7 @@ export default class Account extends Component {
                         changeSettingIconColor={this.state.changeSettingIconColor}
                     />
                 </View>
-                
+
                 <Modalize
                     adjustToContentHeight
                     ref={this.loginSheet}

@@ -80,6 +80,7 @@ target 'yellow_school' do
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
   pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
 
+
   target 'yellow_schoolTests' do
     inherit! :complete
     # Pods for testing
@@ -99,7 +100,7 @@ end
 
 target 'yellow_school-tvOS' do
   # Pods for yellow_school-tvOS
-
+  pod 'Firebase/Analytics'
   target 'yellow_school-tvOSTests' do
     inherit! :search_paths
     # Pods for testing

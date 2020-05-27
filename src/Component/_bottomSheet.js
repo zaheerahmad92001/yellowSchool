@@ -3,7 +3,7 @@ import{
     TouchableOpacity,
     View,StyleSheet,
     Text,
-    Dimensions
+    Dimensions,
 }from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { _Yellow, Black, White, fbColor, googleColor } from '../Colors';

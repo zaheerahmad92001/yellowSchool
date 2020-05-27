@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1082030082725",
+    "firebase_url": "https://yellowschool-6a014.firebaseio.com",
+    "project_id": "yellowschool-6a014",
+    "storage_bucket": "yellowschool-6a014.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082030082725:android:31d1066784596399a25b4c",
+        "android_client_info": {
+          "package_name": "com.yellow_school"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082030082725-7dnnu4a2qv9309166160pm3mu0evr4a1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yellow_school",
+            "certificate_hash": "90366b35fd63dea54a8dc26b30238a17a4e52cc0"
+          }
+        },
+        {
+          "client_id": "1082030082725-g6cd8b5eiojs24f9j4uterq6ab3kjvvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8Hrup28IDldGx5XGrX8L4hYDftAAsUcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082030082725-g6cd8b5eiojs24f9j4uterq6ab3kjvvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
