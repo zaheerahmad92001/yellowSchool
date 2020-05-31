@@ -19,7 +19,7 @@ import _BottomNavigation from '../../Component/bottomNavigation';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 import styles from './styles'
 import _TutorsList from '../../Component/TutorsList';
-const andrew='../../Assets/Andrew.png'
+const andrew='../../Assets/Andrew.jpg'
 const jelena='../../Assets/jelena.jpg'
 const language = [
     { label: 'English language', value: 'English language' },
