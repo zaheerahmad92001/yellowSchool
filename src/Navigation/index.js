@@ -10,7 +10,7 @@ import Login from '../../src/Container/AuthFlow/Login';
 import SignUp from '../../src/Container/AuthFlow/SignUp';
 import ForgetPassword from '../../src/Container/AuthFlow/Forgetpassword';
 import AppLanguage from '../../src/Container/AppLanguages';
-import SearchView from '../Container/Search';
+import AllTutorList from '../Container/TutorList';
 import MessageIntroView from '../Container/MessageIntroView';
 import LessonIntroView from '../Container/LessonIntroView';
 import SingleTutor from '../Container/SingleTutor';
@@ -53,7 +53,7 @@ const AppNavigator = createStackNavigator({
   MessageIntroView:MessageIntroView,
   MyTutorList:MyTutorList,
   MySettings:MySettings,
-  SearchView:SearchView,
+  AllTutorList:AllTutorList,
   SingleTutor:SingleTutor,
   AllMessages:AllMessages,
   MessageView:MessageView,

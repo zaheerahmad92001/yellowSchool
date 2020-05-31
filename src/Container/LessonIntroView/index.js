@@ -78,7 +78,7 @@ export default class  LessonIntroView extends Component{
                       <View style={styles.tutorButtonView}>
                         <_Button
                         styles={{width:screenWidth*0.35,marginLeft:0}}
-                        onPress={()=>this.props.navigation.navigate('SearchView')}
+                        onPress={()=>this.props.navigation.navigate('AllTutorList')}
                         textButton={'Find a tutor'}
                         />
                       </View>

@@ -11,6 +11,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { Black, BorderBottom, lightGreen, _Yellow } from '../Colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 const _TutorsList = (props) => {
+
     return (
         <TouchableOpacity style={styles.container}
         onPress={props.onPress}
@@ -18,7 +19,8 @@ const _TutorsList = (props) => {
             <CardItem>
                 <Left style={{ flex: 2.3, alignSelf: 'flex-start' }}>
                     <Thumbnail circular style={{ justifyContent: 'flex-start' }}
-                        source={require('../Assets/download.jpeg')}
+                      source={props.item.url}
+                        // source={require('../Assets/download.jpeg')}
                     />
                 </Left>
                 <Body style={{ flex: 7, marginTop: RFValue(5) }}>
@@ -26,7 +28,7 @@ const _TutorsList = (props) => {
                         <Text style={styles.tutorName}>{props.item.name}</Text>
                         <Image
                             style={styles.nationalFlag}
-                            source={require('../Assets/nationalflag.png')}
+                             source={require('../Assets/nationalflag.png')}
                         />
                     </View>
                     <View style={styles.lessonView}>

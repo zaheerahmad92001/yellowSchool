@@ -39,7 +39,9 @@ export default class SingleTutor extends Component {
       playerState: PLAYER_STATES.PLAYING,
       screenType: 'cover',
       palyVideo: false,
+
     }
+    this.TutorInfo = this.props
   }
   componentDidMount() {
 
@@ -120,6 +122,8 @@ this.props.navigation.navigate('MessageView')
   }
 
   render() {
+   // console.log("tutor info zaheer",this.props.navigation.getParam('param'))
+  const item = this.props.navigation.getParam('param')
     return (
       <SafeAreaView style={styles.container}>
 
@@ -127,7 +131,7 @@ this.props.navigation.navigate('MessageView')
           /// styles={{position:'absolute'}}
           leftIcon={'keyboard-arrow-left'}
           leftIconStyle={{ color: White }}
-          headerText={'Mehr T.'}
+          headerText={item.name}
           leftIconPress={() => this.goBack()}
         />
 
@@ -147,7 +151,7 @@ this.props.navigation.navigate('MessageView')
                 ref={videoPlayer => (this.videoPlayer = videoPlayer)}
                 resizeMode={this.state.screenType}
                 onFullScreen={this.state.isFullScreen}
-                 source={{ uri: 'https://www.radiantmediaplayer.com/media/bbb-360p.mp4' }}
+                source={{ uri: 'https://www.radiantmediaplayer.com/media/bbb-360p.mp4' }}
                 style={styles.mediaPlayer}
                 volume={10}
               />
@@ -168,7 +172,8 @@ this.props.navigation.navigate('MessageView')
             <View style={{ height: screenHeight * 0.41,}}>
               <ImageBackground 
               style={{width:'100%',height:'100%'}}
-              source={require('../../Assets/download.jpeg')}
+              source={item.url}
+              //source={require('../../Assets/Andrew.png')}
               >
               <View style={{height: screenHeight * 0.41,alignItems:'center',justifyContent:'center'}}> 
              <Icon
@@ -187,12 +192,13 @@ this.props.navigation.navigate('MessageView')
           <View style={styles.tutorInfo}>
             <View style={{ flex: 2, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
               <Thumbnail circular
-                source={require('../../Assets/office.jpg')}
+              source={item.url}
+               // source={require('../../Assets/office.jpg')}
               />
             </View>
             <View style={{ flex: 8, }}>
               <View style={{ flexDirection: 'row' }}>
-                <Text style={styles.Nametext}>Mehr T.</Text>
+        <Text style={styles.Nametext}>{item.name}</Text>
                 <Thumbnail small square
                   style={styles.nationalFlag}
                   source={require('../../Assets/nationalflag.png')}
@@ -248,16 +254,19 @@ this.props.navigation.navigate('MessageView')
             />
           </View>
           <View style={{ marginHorizontal: RFValue(14) }}>
-            <Text style={styles.aboutTutor}>About Mehr T.</Text>
-            <Text style={styles.description}>Hi !</Text>
-            <Text style={styles.description}>My name is Sara and i am Hungarian with a Native English language- l lived and studies in scotland
+            <Text style={styles.aboutTutor}>About {item.name}</Text>
+            {/* <Text style={styles.description}>Hi !</Text> */}
+            <Text>
+              {item.about}
+            </Text>
+            {/* <Text style={styles.description}>My name is Sara and i am Hungarian with a Native English language- l lived and studies in scotland
                     University of Glasgow for four years and one year in canda </Text>
             <Text style={styles.description}>My name is Sara and i am Hungarian with a Native English language- l lived and studies in scotland
                     University of Glasgow for four years and one year in canda </Text>
             <Text style={styles.description}>My name is Sara and i am Hungarian with a Native English language- l lived and studies in scotland
                     University of Glasgow for four years and one year in canda </Text>
             <Text style={styles.description}>My name is Sara and i am Hungarian with a Native English language- l lived and studies in scotland
-                    University of Glasgow for four years and one year in canda </Text>
+                    University of Glasgow for four years and one year in canda </Text> */}
 
             <View style={[styles.bottomBorder, { marginTop: RFValue(20) }]}></View>
 
