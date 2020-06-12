@@ -33,7 +33,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import _BottomNavigation from '../../Component/bottomNavigation';
 import { translate } from '../../Component/i18n';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
-import firebase from '@react-native-firebase/app'
+import firebase from '@react-native-firebase/app';
 
 export default class Account extends Component {
     loginSheet = React.createRef();
@@ -205,8 +205,6 @@ export default class Account extends Component {
     //       }
     //     )
     //   }
-
-
 
     renderBottomSheet = () => {
         return (

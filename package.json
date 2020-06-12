@@ -40,10 +40,14 @@
     "react-native-screens": "^2.5.0",
     "react-native-simple-radio-button": "^2.7.4",
     "react-native-text-input-mask": "^2.0.0",
+    "react-native-timezone": "^1.0.3",
     "react-native-video": "^4.4.5",
     "react-navigation": "^4.3.9",
     "react-navigation-stack": "^2.5.1",
-    "react-number-format": "^4.4.1"
+    "react-number-format": "^4.4.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3"
   },
   "devDependencies": {
     "@babel/core": "7.9.0",

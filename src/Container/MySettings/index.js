@@ -14,8 +14,13 @@ import PaymentHistory from '../PaymentHistory';
 import LessonSetting from '../LessonSetting'
 import CalendarSetting from '../CalendarSetting';
 import NotificationSetting from '../Notification';
+import DialogBox from 'react-native-dialogbox';
+import AsyncStorage from '@react-native-community/async-storage';
+import {connect} from 'react-redux';
+import { UserInfo } from '../../Redux/Actions/User';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
-export default class MySettings extends Component {
+
+export  class MySettings extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -152,6 +157,28 @@ export default class MySettings extends Component {
     _Done=()=>{
         this.props.navigation.pop()
     }
+    signOut=()=>{
+       this.dialogbox.confirm({
+           title:'Are you sure ?',
+           content:'do you want to signout from YellowSchool',
+           ok:{
+               text:'Yes', 
+               callback:() =>{
+                 AsyncStorage.removeItem('loginUser').then(
+                     this.props.navigation.navigate('Account')
+                 ).catch((error)=>{
+                     console.log('throw an error while signout')
+                 })
+               }
+               
+           },
+           cancel:{
+               text:'No',
+
+           }
+
+       });
+    }
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -159,6 +186,8 @@ export default class MySettings extends Component {
                     leftText={'Done'}
                     headerText={'MySETTINGS'}
                     leftPress={()=>this._Done()}
+                    rightText={'SignOut'}
+                    rightPress={()=>this.signOut()}
                 />
                 <ScrollView horizontal={true}
                     showsHorizontalScrollIndicator={false}
@@ -195,7 +224,10 @@ export default class MySettings extends Component {
                 <ScrollView showsVerticalScrollIndicator={false} style={{ height: screenHeight * 0.60, }}>
                     <View style={{ marginHorizontal: RFValue(15) }}>
                         {this.state.accountClicked ?
-                            <AccountSetting /> :
+                            <AccountSetting 
+                            dialogbox={()=>this.dialogbox}
+                            navigation={this.props.navigation}
+                            /> :
                             this.state.passwordClicked ?
                                 <PasswordSetting /> :
                                 this.state.paymentMethodsClicked ?
@@ -227,7 +259,21 @@ export default class MySettings extends Component {
                         changeSettingIconColor={this.state.changeSettingIconColor}
                     />
                 </View>
+                <DialogBox ref={dialogbox => { this.dialogbox = dialogbox }} />
             </SafeAreaView>
         )
     }
 }
+const mapStateToProps =(state)=>{
+    return{
+        user:state.user.UserInfo
+    }
+    }
+    const mapDispatchToProps =(dispatch)=>{
+        return{
+            // UserData:(data)=>{
+            //     dispatch(UserInfo(data))
+            // }
+        }
+    }
+    export default connect(mapStateToProps,mapDispatchToProps)(MySettings)

@@ -1,0 +1,15 @@
+{
+    "register":{
+        "method":"POST",
+        "route":"/users"
+    },
+"login":{
+    "method":"POST",
+    "route":"/auth"
+},
+"accountDetail":{
+    "method":"PUT",
+    "route":"/users"
+}
+
+}
