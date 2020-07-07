@@ -11,6 +11,21 @@ import TodaySlots from '../TodaySlots';
 import TomorrowSlots from '../TomorrowSlots';
 import SpecificDayOneSlots from '../specificDayOneSlots';
 import SpecificDayTwoSlots from '../specificDayTwoSlots';
+import { convertDateToString } from '../../RandomFun';
+
+        let currentDate  = new Date()
+        let today = convertDateToString(currentDate)
+      
+        let tomorrow = currentDate.setDate(currentDate.getDate()+1) 
+         tomorrow= convertDateToString (new Date(tomorrow))
+    
+         let specDay1 = currentDate.setDate(currentDate.getDate()+1) 
+         specDay1= convertDateToString (new Date(specDay1))
+    
+         let specDay2 = currentDate.setDate(currentDate.getDate()+1) 
+         specDay2= convertDateToString (new Date(specDay2))
+        
+        //  console.log('current day',today,'tomorrow',tomorrow,'day 1',specDay1,'day 2',specDay2)  
 
 export default class SlotsAvailable extends Component{
     constructor(props){
@@ -21,10 +36,19 @@ export default class SlotsAvailable extends Component{
             Day1Clicked:false,
             Day2Clicked:false,
         }
+        
+        
     }
+
+componentDidMount(){
+    
+
+}
+
     goBack =()=>{
-this.props.navigation.pop()
+    this.props.navigation.pop()
     }
+
     todayAvailability=()=>{
         this.setState({
             todayClicked:true,
@@ -58,6 +82,18 @@ this.props.navigation.pop()
         }) 
     }
     render(){
+        let currentDate  = new Date()
+        let specificDay1 = currentDate.setDate(currentDate.getDate()+2) 
+        specificDay1 = new Date(specificDay1).toString()
+        specificDay1 = specificDay1.slice(0,10)
+
+        let newCurrentDate = new Date()
+        let specificDay2  = newCurrentDate.setDate(newCurrentDate.getDate()+3)
+        specificDay2 = new Date(specificDay2).toString()
+        specificDay2 = specificDay2.slice(0,10)
+
+        let tutorId = this.props.navigation.getParam('tutorId')
+
         return(
             <SafeAreaView style={styles.container}>
              <_AppHeader
@@ -95,26 +131,42 @@ this.props.navigation.pop()
                   forthButtonClicked={this.state.Day2Clicked}
                   firstButtonHeading={'Today'}
                   secondButtonHeading={'Tomorrow'}
-                  thirdButtonHeading={'Fri,Mar 13'}
-                  forthButtonHeading={'Sat,Mar 13'}
+                  thirdButtonHeading={specificDay1}
+                  forthButtonHeading={specificDay2}
                   />
                   <View style={[styles.bottomBorder,{marginTop:RFValue(10)}]}></View>
                  
                  { this.state.todayClicked ?
                  <TodaySlots
                  navigation={this.props.navigation}
+                 item={{
+                     today,
+                    tutorId
+                }}
                  /> :
                  this.state.tomorrowClicked ?
                  <TomorrowSlots
                  navigation={this.props.navigation}
+                 item={{
+                    tomorrow,
+                   tutorId
+               }}
                  />:
                  this.state.Day1Clicked ?
                  <SpecificDayOneSlots
                  navigation={this.props.navigation}
+                 item={{
+                   specDay1,
+                   tutorId
+               }}
                  />:
                  this.state.Day2Clicked ?
                  <SpecificDayTwoSlots
                  navigation={this.props.navigation}
+                 item={{
+                    specDay2,
+                    tutorId
+                }}
                  />:null
                  }
                 

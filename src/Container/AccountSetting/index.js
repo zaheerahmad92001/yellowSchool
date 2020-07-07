@@ -4,7 +4,8 @@ import {
     Text,
     Dimensions,
     Image,
-    ActivityIndicator
+    ActivityIndicator,
+    ToastAndroid
 } from 'react-native';
 import styles from './styles';
 import { Thumbnail, Icon } from 'native-base';
@@ -61,8 +62,9 @@ export class AccountSetting extends Component {
             cca2: "PK",
             callingCode: '92',
             token: this.props.user.token,
-            logOut:false,
+            logOut: false,
             loading: false,
+            loading2:false,
         }
         this.inputRefs = {
             skypeRef: null
@@ -71,15 +73,15 @@ export class AccountSetting extends Component {
 
     }
 
-   async componentDidMount() {
+    async componentDidMount() {
         const item = await AsyncStorage.getItem('loginUser')
-        if(item){
+        if (item) {
             this.setState({
-                logOut:false
+                logOut: false
             })
-        }else{
+        } else {
             this.setState({
-                logOut:true
+                logOut: true
             })
         }
 
@@ -97,52 +99,68 @@ export class AccountSetting extends Component {
     _Disconnect = () => {
 
     }
-    _deleteAccount = () => {
-
-    }
-    _saveSetting = () => {
+    _deleteAccount=()=>{
         const scope = this;
-        const { cca2, email, firstName, lastName, skypeId, callingCode, contact, _timeZone, avatarSource, token ,logOut} = this.state;
+        scope.props.dialogbox().confirm({
+            title: "oh no !",
+            content: 'Do you want to delete your account ?',
+            style: { fontsize: RFValue(15) },
+            ok: {
+                text: 'Yes',
+                callback: () => this._delete()
+            },
+            cancel: {
+                text: 'No',
+                callback: () => {
+
+                }
+            }
+        })
+    }
+    _delete = () => {
+        const scope = this;
+        const { token, logOut, loading2 } = this.state;
         if (token) {
-            if(!logOut){
-            if (email.trim().length > 0 && ValidateEmail(email.trim())) {
-                this.setState({ loading: true })
-                AccountDetail.account(email, firstName, lastName, contact, skypeId, _timeZone, avatarSource, socialNetworks).then((res) => {
+            if (!logOut) {
+                this.setState({ loading2: true })
+                AccountDetail.deleteAccount().then((res) => {
                     if (res.success) {
-                        this.setState({
-                            loading: false,
-                            email: '',
-                            firstName: '',
-                            lastName: '',
-                            skypeId: '',
-                            _timeZone: 'None',
-                            contact: '',
-                            avatarSource: ''
-                        })
-                        // console.log('success', res)
-                        // alert('success')
+                        this.setState({ loading2: false })
+                        ToastAndroid.show('Deleted successfully',ToastAndroid.SHORT)
                     } else {
-                        scope.props.dialogbox().tip({
+                        scope.dialogbox().tip({
                             title: "oh no !",
                             content: res.error,
-                            style: { fontsize: RFValue(15) }
+                            style: { fontsize: RFValue(15) },
                         })
+                        this.setState({ loading2: false })
                     }
                 }).catch((error) => {
-                    scope.props.dialogbox().tip({
+                    scope.dialogbox().tip({
                         title: "oh no !",
                         content: 'network request fail',
-                        style: { fontsize: RFValue(15) }
+                        style: { fontsize: RFValue(15) },
                     })
                 })
             } else {
-                scope.props.dialogbox().tip({
+                scope.props.dialogbox().confirm({
                     title: "oh no !",
-                    content: 'enter valid email',
-                    style: { fontsize: RFValue(15) }
+                    content: 'Need to login first',
+                    style: { fontsize: RFValue(15) },
+                    ok: {
+                        text: 'Yes',
+                        callback: () => { this.props.navigation.navigate('Account') }
+                    },
+                    cancel: {
+                        text: 'No',
+                        callback: () => {
+
+                        }
+                    }
                 })
             }
-        }else{
+
+        } else {
             scope.props.dialogbox().confirm({
                 title: "oh no !",
                 content: 'Need to login first',
@@ -159,6 +177,81 @@ export class AccountSetting extends Component {
                 }
             })
         }
+
+    }
+    _saveSetting = () => {
+        const scope = this;
+        const { cca2, email, firstName, lastName, skypeId, callingCode, contact, _timeZone, avatarSource, token, logOut } = this.state;
+        let _contact = callingCode + contact
+        if (token) {
+            if (!logOut) {
+                if (email.trim().length > 0 && ValidateEmail(email.trim())) {
+                    this.setState({ loading: true })
+// var formdata = new FormData();
+// formdata.append("email",email)
+// formdata.append("firstName",firstName)
+// formdata.append("lastName",lastName)
+// formdata.append("phoneNumber",_contact)
+// formdata.append("skypeId",skypeId)
+// formdata.append("timeZone",_timeZone)
+// formdata.append("image",{uri:avatarSource.uri, name: 'imageTemp100.jpg', type: 'image/jpeg' })
+// formdata.append("socialNetworks",socialNetworks)
+
+              AccountDetail.account(email, firstName, lastName, _contact, skypeId, _timeZone, avatarSource, socialNetworks)
+            //  AccountDetail.account(formdata)
+                    .then((res) => {  console.log("res ", res)
+                        if (res.success) {
+                            this.setState({
+                                loading: false,
+                                email:"",
+                                firstName:"",
+                                lastName: "",
+                                skypeId: "",
+                                _timeZone: 'None',
+                                contact: "",
+                                avatarSource: ""
+                            })
+                            console.log('success', res)
+                        } else {
+                            scope.props.dialogbox().tip({
+                                title: "oh no !",
+                                content: res.error,
+                                style: { fontsize: RFValue(15) }
+                            })
+                            this.setState({ loading: false })
+                        }
+                    }).catch((error) => {
+                        console.log('error',error)
+                        scope.props.dialogbox().tip({
+                            title: "oh no !",
+                            content: 'network request fail',
+                            style: { fontsize: RFValue(15) }
+                        })
+                    })
+                } else {
+                    scope.props.dialogbox().tip({
+                        title: "oh no !",
+                        content: 'enter valid email',
+                        style: { fontsize: RFValue(15) }
+                    })
+                }
+            } else {
+                scope.props.dialogbox().confirm({
+                    title: "oh no !",
+                    content: 'Need to login first',
+                    style: { fontsize: RFValue(15) },
+                    ok: {
+                        text: 'Yes',
+                        callback: () => { this.props.navigation.navigate('Account') }
+                    },
+                    cancel: {
+                        text: 'No',
+                        callback: () => {
+
+                        }
+                    }
+                })
+            }
         } else {
             scope.props.dialogbox().confirm({
                 title: "oh no !",
@@ -184,7 +277,6 @@ export class AccountSetting extends Component {
     upLoadImg = () => {
         ImagePicker.showImagePicker(options, (response) => {
             console.log('Response = ', response);
-
             if (response.didCancel) {
                 console.log('User cancelled image picker');
             } else if (response.error) {
@@ -199,13 +291,14 @@ export class AccountSetting extends Component {
 
                 this.setState({
                     avatarSource: source,
+
                 });
             }
         });
     }
     render() {
 
-        const { cca2, email, firstName, lastName, skypeId, callingCode, contact, token, loading } = this.state;
+        const { cca2, email, firstName, lastName, skypeId, callingCode, contact, token, loading,loading2 } = this.state;
         //console.log('user information is here', token)
         return (
             <View style={styles.container}>
@@ -314,7 +407,7 @@ export class AccountSetting extends Component {
                                         fontSize: RFValue(16),
                                         paddingHorizontal: 10,
                                         borderRadius: 10,
-                                        color: _Yellow
+                                        color:'black'
                                     },
                                     inputIOS: {
                                         fontSize: RFValue(16),
@@ -322,7 +415,7 @@ export class AccountSetting extends Component {
                                         paddingVertical: 5,
                                         borderRadius: 10,
                                         placeholderTextColor: _Yellow,
-                                        color: _Yellow,
+                                        color:'black',
                                     },
                                 }}
                                 onValueChange={(value) => this.setState({
@@ -399,12 +492,18 @@ export class AccountSetting extends Component {
                             }
                         </View>
                         <View style={[styles.ButtonBox, { marginBottom: RFValue(30) }]}>
+                        {loading2 ?
+                          <ActivityIndicator
+                          color={_Yellow}
+                          size={'large'}
+                          />:
                             <_Button
                                 styles={[styles.saveSetting, { borderColor: Red }]}
                                 textStyle={[styles.testStyle, { color: Red }]}
                                 textButton={'Delete account'}
                                 onPress={() => this._deleteAccount()}
                             />
+                        }
                         </View>
                     </View>
                 </View>

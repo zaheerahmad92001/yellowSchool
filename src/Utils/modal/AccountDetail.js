@@ -1,10 +1,14 @@
 import React,{Component}from 'react';
 import { requestHandler } from '../requestHandler';
 export default class AccountDetail extends Component{
-    static account(email,firstName,lastName,phoneNumber,skypeId,timeZone,image,socialNetworks){
-        // console.log('email',email,'fname',firstName,'lname',lastName,'phone',phoneNumber,'sype',skypeId
-        // ,'tiem',timeZone,'image',image,'social',socialNetworks)
-        return requestHandler('accountDetail',{
+
+     static account(email,firstName,lastName,phoneNumber,skypeId,timeZone,image,socialNetworks)
+    // static account(data)
+{
+        
+        return requestHandler('accountDetail',
+        {
+           // data: subiData
             email:email,
             firstName:firstName,
             lastName:lastName,
@@ -14,5 +18,14 @@ export default class AccountDetail extends Component{
             image:image,
             socialNetworks
         })
+    };
+    static changePassword(password){
+        return requestHandler('changePassword',{
+            password:password
+        })
+    };
+    static deleteAccount(){
+        return requestHandler('deleteAccount')
     }
+
 }

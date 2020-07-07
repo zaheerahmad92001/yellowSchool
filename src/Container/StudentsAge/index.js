@@ -16,19 +16,19 @@ import _AppHeader from '../../Component/AppHeader';
 import _BottomStaticButton from '../../Component/bottomStaticButton';
 import _AgeList from '../../Component/studentAgeList';
 const {height:screenHeight,width:screenWidth}= Dimensions.get('window');
-const ageList =[
-    {category:'Preshoolers',age:'4-6'},
-    {category:'Primary school',age:'6-12'},
-     {category:'Primary school',age:'12-17'},
-     {category:'Undergraduate',age:'17-22'},
+// const ageList =[
+//     {category:'Preshoolers',age:'4-6'},
+//     {category:'Primary school',age:'6-12'},
+//      {category:'Primary school',age:'12-17'},
+//      {category:'Undergraduate',age:'17-22'},
 
-]
+// ]
 export default class StudentAge extends Component{
     constructor(props){
         super(props)
         this.state={
-
-        }
+        
+        } 
     }
     renderStudentsAge =({item})=>{
         return(
@@ -44,6 +44,9 @@ export default class StudentAge extends Component{
    this.props.navigation.navigate("SlotsAvailable")
     }
     render(){
+        const preferedStudentAge = this.props.navigation.getParam('preferedStudentAge')
+        const hourlyRate = this.props.navigation.getParam('hourlyRate')
+      
         return(
             <SafeAreaView style={styles.container}>
             <_AppHeader
@@ -56,7 +59,7 @@ export default class StudentAge extends Component{
                 />
                 <View style={styles.content}>
             <FlatList
-            data={ageList}
+            data={preferedStudentAge}
             keyExtractor={(item)=>item.key}
             renderItem={this.renderStudentsAge}
             />
@@ -64,6 +67,7 @@ export default class StudentAge extends Component{
                 <_BottomStaticButton
                 perHourPriceText={{color:White}}
                 BookLesson={()=>this._bookLesson()}
+                perHour={hourlyRate}
                 />
             </SafeAreaView>
         )

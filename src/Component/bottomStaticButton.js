@@ -11,7 +11,7 @@ const _BottomStaticButton=(props)=>{
 <View style={[styles.container,props.containerStyle]}>
           <View style={styles.content}>
               <View>
-              <Text style={[styles.ratePerHour,props.perHourPriceText]}>$18 per hour</Text>  
+              <Text style={[styles.ratePerHour,props.perHourPriceText]}>$ {props.perHour} per hour</Text>  
               <View style={{flexDirection:'row'}}> 
               <Icon
               name={'check'}

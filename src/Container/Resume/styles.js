@@ -17,14 +17,14 @@ export default StyleSheet.create({
         flex:1
     },
     subContent:{
-    flex:1,
+    // flex:1,
     marginHorizontal:RFValue(15),
     marginTop:RFValue(15)
     },
     headingText:{
         fontWeight:'bold',
         color:Black,
-        fontSize:RFValue(12)
+        fontSize:RFValue(16)
     },
     inputStyle:{
         fontSize:RFValue(12),

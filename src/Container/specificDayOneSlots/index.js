@@ -1,23 +1,58 @@
 import React ,{Component}from 'react';
-import {View,Text,Dimensions, FlatList} from 'react-native';
+import {View,Text,Dimensions, FlatList, ActivityIndicator} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styles from './styles';
 import { _Yellow, lightYellow } from '../../Colors';
 import _TimeZone from '../../Component/TimeZone';
+import { convertDateToString } from '../../RandomFun';
+import { connect } from 'react-redux';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
-const time=[
-    {time:'19:00'},
-    {time:'21:00'},
-    {time:'17:00'},
-]
-export default class SpecificDayOneSlots extends Component{
+
+ class SpecificDayOneSlots extends Component{
     constructor(props){
         super(props)
+        const { item } = this.props
         this.state={
-            slotsAvailable:true
+            tutorId: item.tutorId,
+            today: item.specDay1,
+            mapOnce: true,
+            todayAvailability: [],
+            availability: [],
+            loading: false
         }
     }
+
+    componentDidMount() {
+        const { tutorId, today } = this.state
+        this.setState({ loading: true })
+        let req = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json,text/plain',
+                'Content-Type': 'application/json',
+                'authorization': this.props.user.token
+            },
+        }
+        fetch(`https://yellow-school.herokuapp.com/api/tutors/getAvailabilty/${tutorId}`, req).then((response) => response.json())
+            .then((res) => {
+                if (res.success) {
+
+                    this.setState({
+                        availability: res.data.availabilty,
+                        loading: false
+                    })
+                } else {
+                    console.log('error ')
+                }
+
+            }).catch((error) => {
+                console.log('error occure', error)
+            })
+
+    }
+
+
     _onPress=()=>{
      this.props.navigation.navigate('CheckOut')
     }
@@ -30,16 +65,39 @@ export default class SpecificDayOneSlots extends Component{
        )
    }
     render(){
+        const { tutorId, today, availability, mapOnce, todayAvailability, loading } = this.state
+        
+        {
+            mapOnce ?
+                availability.map((value) => {
+                    let availableDay = convertDateToString(new Date(value.day))
+                    let _todaaaaay = convertDateToString(new Date(today))
+                    console.log('value in map ', _todaaaaay,'available day',availableDay)
+                    if (_todaaaaay === availableDay) {
+                        this.state.todayAvailability.push(
+                            value
+                        )
+                    }
+                    this.setState({ mapOnce: false })
+                }) : null
+        }
+
         return(
        <View style={{height:screenHeight,width:screenWidth,marginTop:RFValue(5)}}>
-        { this.state.slotsAvailable ?
+        { loading ?
+        <ActivityIndicator
+        color={_Yellow}
+        size={'large'}
+        />:
+           todayAvailability.length > 0 ?
+
            <View style={styles.contentView}>
              <Text style={styles.localTime}>
                 {'Your local time zone'}
              </Text>
              <FlatList
              style={{marginTop:RFValue(10)}}
-             data={time}
+             data={todayAvailability}
              keyExtractor={(item)=>{(item.id)}}
              renderItem={this.renderTime}
              showsVerticalScrollIndicator={false}
@@ -60,3 +118,10 @@ export default class SpecificDayOneSlots extends Component{
         )
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        user: state.user.UserInfo
+    }
+}
+
+export default connect(mapStateToProps)(SpecificDayOneSlots)

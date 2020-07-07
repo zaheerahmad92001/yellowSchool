@@ -39,6 +39,8 @@
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.5.0",
     "react-native-simple-radio-button": "^2.7.4",
+    "react-native-svg": "^12.1.0",
+    "react-native-svg-flagkit": "^0.9.5",
     "react-native-text-input-mask": "^2.0.0",
     "react-native-timezone": "^1.0.3",
     "react-native-video": "^4.4.5",

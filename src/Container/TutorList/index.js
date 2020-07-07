@@ -8,7 +8,8 @@ import {
     Platform,
     SafeAreaView,
     Image,
-    Picker
+    Picker,
+    ActivityIndicator
 } from 'react-native';
 import { headerColor, White, _Yellow, Black } from '../../Colors';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -19,29 +20,24 @@ import _BottomNavigation from '../../Component/bottomNavigation';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 import styles from './styles'
 import _TutorsList from '../../Component/TutorsList';
+import Tutors from '../../Utils/modal/Tutors';
+import DialogBox from 'react-native-dialogbox';
+
 const andrew='../../Assets/Andrew.jpg'
 const jelena='../../Assets/jelena.jpg'
 const language = [
     { label: 'English language', value: 'English language' },
     { label: 'Chinies language', value: 'Chinies language' },
 ]
-const tutorsList = [
-    { name: 'Andrew.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $12/H',url:require(andrew),about:
-    'Hi! My name is Andrew and I am a certified English teacher. Tired of boring and ineffective language classes? Let’s make a difference in learning together! Languages is my everything. I speak 8 myself.Sometimes people ask me, how can I have so many friends from all around the world?A veces me preguntan, como puedo tener tantos amigos de todos los lugares del mundo?Well, I enjoy traveling and exploring new cultures, and that would be not possible without spoken English skills. The countries where I used to live and teach include China, Poland, Vietnam, Spain and Malaysia. I am ready toreveal all the secrets of effective language learning, as well as help you start speaking shortly. 我准备给您公开所有的秘密，怎么最快开始说外语。In our class we will use Direct Method Approach which helps you boost your speaking skills and broaden your vocabulary after a couple of lessons. I know, a lot of students feel insecure to actually speak in a foreign language, because they are afraid of making mistakes. But don’t worry, that’s the way to learn. All the beginnings are difficult, but man learns from failures. Aller Anfang ist schwer, und aus Schaden wird man klug.How are the classes going to look like? I believe that live conversations alongside with interactive resources such as Miro, Youtube, and Google Classroom make the most fruitful results in language learning. That’s why all the class time we are going to speak 100% in English (or the other language you want to learn). In fact, it’s very simple - more practice, less boring and old-fashioned exercices.На самом деле все очень просто! Больше практики - меньше устарелых и скучных упражнений.Want to apply for your first job abroad, or maybe book a flight or hotel on an English language platform?  Or maybe you are looking for advice on an foreign forum and don’t really know what’s going on? Czy może chcesz poszukać porady na blogu obcojęzycznym i nie do końca rozumiesz o co chodzi? Let’s do it in class with my helpful guidance. Join the progressive world community and learn online from anywhere, now.'},
-    { name: 'Jelena', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $12/H',url:require(jelena), about:
-    'Hello everyone! My name is Emely. I have been an English teacher for 5 years. Also I have an experience om working with kids as a camp counsellor. Based on this experience I realized that my heart set on teaching. I have had an experience of teaching students of different ages, but I really enjoy working with kids starting from 3 to 12 years old. I think they are open, honest and they have really good energy. I have been living in the USA and in China, and working in one of the training centers in Shanghai, China is the best part of my life! During my classes I am trying to make my students talk. Learning language is not just learning some words or phrases. Of course you can learn a lot of new words, phrases, grammar, rules. It s important. But these knowledge is useless without practice. It will not help you to develop your speaking skills. Also teaching is not just about what to teach, more important thing is how to teach. I have graduated with my bachelors degree and I know different methods how to learn language more effectively. My young students learn a language without even realizing it! And I think it s really cool! They do usual things like playing games or singing songs and they learn a new language! So I am here to help you to get your English to the next level, and I want to teach you to communicate with english speakers anywhere around the world! Now we have a great opportunity to learn something new and no matter where we are now! So you can join us now from any part of the world and enjoy learning English with me! See you soon! Have a great day! '
-      },
-    // { name: 'Methew T.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
-    // { name: 'Methew T.', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
-    // { name: 'Methew T.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
-    // { name: 'Methew T.', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
-    // { name: 'Methew T.', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
-    // { name: 'Methew T.', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
-    // { name: 'Methew T.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
-    // { name: 'Methew T.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $ 12/H' },
+// const tutorsList = [
+//     { name: 'Andrew.', rating: '4.9', type: 'New', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $12/H',url:require(andrew),about:
+//     'Hi! My name is Andrew and I am a certified English teacher. Tired of boring and ineffective language classes? Let’s make a difference in learning together! Languages is my everything. I speak 8 myself.Sometimes people ask me, how can I have so many friends from all around the world?A veces me preguntan, como puedo tener tantos amigos de todos los lugares del mundo?Well, I enjoy traveling and exploring new cultures, and that would be not possible without spoken English skills. The countries where I used to live and teach include China, Poland, Vietnam, Spain and Malaysia. I am ready toreveal all the secrets of effective language learning, as well as help you start speaking shortly. 我准备给您公开所有的秘密，怎么最快开始说外语。In our class we will use Direct Method Approach which helps you boost your speaking skills and broaden your vocabulary after a couple of lessons. I know, a lot of students feel insecure to actually speak in a foreign language, because they are afraid of making mistakes. But don’t worry, that’s the way to learn. All the beginnings are difficult, but man learns from failures. Aller Anfang ist schwer, und aus Schaden wird man klug.How are the classes going to look like? I believe that live conversations alongside with interactive resources such as Miro, Youtube, and Google Classroom make the most fruitful results in language learning. That’s why all the class time we are going to speak 100% in English (or the other language you want to learn). In fact, it’s very simple - more practice, less boring and old-fashioned exercices.На самом деле все очень просто! Больше практики - меньше устарелых и скучных упражнений.Want to apply for your first job abroad, or maybe book a flight or hotel on an English language platform?  Or maybe you are looking for advice on an foreign forum and don’t really know what’s going on? Czy może chcesz poszukać porady na blogu obcojęzycznym i nie do końca rozumiesz o co chodzi? Let’s do it in class with my helpful guidance. Join the progressive world community and learn online from anywhere, now.'},
+//     { name: 'Jelena', rating: '4.9', review: '(9)', totalLesson: '33', tutorCategory: 'Certified English Tutor', ratePerHour: ' $12/H',url:require(jelena), about:
+//     'Hello everyone! My name is Emely. I have been an English teacher for 5 years. Also I have an experience om working with kids as a camp counsellor. Based on this experience I realized that my heart set on teaching. I have had an experience of teaching students of different ages, but I really enjoy working with kids starting from 3 to 12 years old. I think they are open, honest and they have really good energy. I have been living in the USA and in China, and working in one of the training centers in Shanghai, China is the best part of my life! During my classes I am trying to make my students talk. Learning language is not just learning some words or phrases. Of course you can learn a lot of new words, phrases, grammar, rules. It s important. But these knowledge is useless without practice. It will not help you to develop your speaking skills. Also teaching is not just about what to teach, more important thing is how to teach. I have graduated with my bachelors degree and I know different methods how to learn language more effectively. My young students learn a language without even realizing it! And I think it s really cool! They do usual things like playing games or singing songs and they learn a new language! So I am here to help you to get your English to the next level, and I want to teach you to communicate with english speakers anywhere around the world! Now we have a great opportunity to learn something new and no matter where we are now! So you can join us now from any part of the world and enjoy learning English with me! See you soon! Have a great day! '
+//       },
+    
 
-
-]
+// ]
 export default class AllTutorList extends Component {
     constructor(props) {
         super(props)
@@ -50,13 +46,46 @@ export default class AllTutorList extends Component {
             changeSearchIconColor: true,
             changeMessageIconColor: false,
             changeUserIconColor: false,
-            changeSettingIconColor: false
+            changeSettingIconColor: false,
+            tutorsList:[],
+            ratings:[],
+            loading:false,
+
+            mapOnce:true,
+            subjectList:[],
+            populate:[]
 
         }
         this.inputRefs = {
             language: null
         }
     }
+componentDidMount(){
+    this.setState({loading:true})
+    const scope = this
+// Subject.SubjectList().then((res)=>{
+//     this.setState({subjectList:res.subjects})
+// }).catch((error)=>{
+// console.log('error in Fetching subject list',error)
+// })
+
+Tutors.TutorsList().then((res)=>{
+    if(res.success){
+     scope.setState({
+          loading:false,
+          tutorsList:res.data,
+        })
+    console.log('tutor list ',this.state.tutorsList)    
+    }else{
+     console.log('error in getting All TutorList')
+    }
+   
+}).catch((error)=>{
+    console.log('error in request',error)
+})
+
+}
+
     _Search = () => {
 
         this.setState({
@@ -102,8 +131,6 @@ export default class AllTutorList extends Component {
                     param:item
                 })}
             />
-
-
         )
     }
  setSelectedValue=(value)=>{
@@ -111,6 +138,21 @@ export default class AllTutorList extends Component {
     selectedValue:value
   })
     }
+
+    PickerValue=(value)=>{
+        this.setState({
+            selectedLanguage:value
+        })
+        if(value){
+        // Subject.TutorList(value).then((res)=>{
+        //     console.log('response',res)
+        // }).catch((error)=>{
+        //     console.log('error',error)
+        // })
+    console.warn('picker value ',value)
+}
+    }
+
     render() {
         const placeholder = {
             label: 'select language',
@@ -119,6 +161,20 @@ export default class AllTutorList extends Component {
             placeholderTextColor: Black,
             fontSize: RFValue(14)
         }
+const {mapOnce,subjectList ,loading,tutorsList} = this.state;
+
+{mapOnce ?
+    subjectList.map((value)=>{
+     this.state.populate.push({
+         label:value.name,
+         value:value.id
+     })
+     this.setState({mapOnce:false})
+    }):null
+
+}
+
+ //console.log('selected language',tutorsList)
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
@@ -158,10 +214,11 @@ export default class AllTutorList extends Component {
                                        // backgroundColor:'red'
                                     },
                                 }}
-                                onValueChange={(value) => this.setState({
-                                    selectedLanguage: value,
+                                onValueChange={(value)=>this.PickerValue(value)}
+                                // onValueChange={(value) => this.setState({
+                                //     selectedLanguage: value,
 
-                                })}
+                                // })}
                                 items={language}
                                 value={this.state.selectedLanguage}
                                 Icon={() => {
@@ -179,14 +236,21 @@ export default class AllTutorList extends Component {
                         </View>
                     </View>
                 </View>
+                
                 <View style={styles.content}>
+                    {loading ? 
+                    <ActivityIndicator
+                    color={_Yellow}
+                    size={'large'}
+                    />:
                     <FlatList
-                        extraData={tutorsList}
-                        data={tutorsList}
+                        extraData={this.state.tutorsList}
+                        data={this.state.tutorsList}
                         keyExtractor={(item) => { item.id }}
                         renderItem={this.renderTutorList}
                         showsVerticalScrollIndicator={false}
                     />
+                    }
                     <View style={styles.filters}>
                         <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}}
                         onPress={()=>this.props.navigation.navigate('FilterView')}
@@ -200,6 +264,7 @@ export default class AllTutorList extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
+                
                 <View style={{ flex: 1 }}>
                     <_BottomNavigation
                         SearchClick={() => this._Search()}
@@ -212,6 +277,7 @@ export default class AllTutorList extends Component {
                         changeSettingIconColor={this.state.changeSettingIconColor}
                     />
                 </View>
+                <DialogBox ref={dialogbox => { this.dialogbox = dialogbox }} />
             </SafeAreaView>
         )
     }

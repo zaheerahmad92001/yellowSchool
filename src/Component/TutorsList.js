@@ -10,7 +10,11 @@ import { CardItem, Left, Body, Right, Thumbnail, Icon } from 'native-base';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Black, BorderBottom, lightGreen, _Yellow } from '../Colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Flag } from 'react-native-svg-flagkit'
+
 const _TutorsList = (props) => {
+    let name = props.item.firstName+ ' '+ props.item.lastName
+
 
     return (
         <TouchableOpacity style={styles.container}
@@ -25,36 +29,39 @@ const _TutorsList = (props) => {
                 </Left>
                 <Body style={{ flex: 7, marginTop: RFValue(5) }}>
                     <View style={styles.nameView}>
-                        <Text style={styles.tutorName}>{props.item.name}</Text>
-                        <Image
-                            style={styles.nationalFlag}
-                             source={require('../Assets/nationalflag.png')}
-                        />
+                        <Text style={styles.tutorName}>{name}</Text>
+                        <View style={{ marginTop: 2, marginLeft: 10 }}>
+                    {props.item.country ?
+                      <Flag
+                        id={props.item.country}
+                        size={0.1}
+                      /> : null}
+                  </View>
                     </View>
                     <View style={styles.lessonView}>
                 {props.item.type ?
                             <Text style={styles.Newtext}>{'New'}</Text>
                             :
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={styles.ratingCount}>{props.item.rating}</Text>
+                                <Text style={styles.ratingCount}>{props.item.rating_average}</Text>
                                 <Icon
                                     name={'star-border'}
                                     type={'MaterialIcons'}
                                     style={{ fontSize: RFValue(14), color: _Yellow, marginTop: RFValue(1) }}
                                 />
-                                <Text style={styles.totlReview}>{props.item.review}</Text>
-                                <Text style={styles.Count}>{props.item.totalLesson}</Text>
+                                <Text style={styles.totlReview}>({props.item.totalReviews})</Text>
+                                <Text style={styles.Count}>{props.item.totalLessons}</Text>
                                 <Text style={styles.lessonsText}>{'lessons'}</Text>
                             </View>
                     }
                     </View>
                     <View style={{ marginTop: RFValue(8) }}>
-                <Text style={styles.tutorCategory}>{props.item.tutorCategory}</Text>
+                <Text style={styles.tutorCategory}>{props.item.headline}</Text>
                     </View>
                 </Body>
                 <Right style={{ flex: 2, alignSelf: 'flex-start', marginTop: RFValue(5) }}>
                     <Text style={styles.RatePerHour}>
-                       {props.item.ratePerHour}
+                       $ {props.item.hourlyRate} / Hour
                    </Text>
                 </Right>
             </CardItem>

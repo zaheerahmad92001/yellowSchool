@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text
+    Text,
+    FlatList
 } from 'react-native';
 import styles from './styles';
 import _AppHeader from '../../Component/AppHeader';
@@ -10,6 +11,8 @@ import _BottomStaticButton from '../../Component/bottomStaticButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import _TextInput from '../../Component/Input';
 import { RFValue } from 'react-native-responsive-fontsize';
+import _AgeList from '../../Component/studentAgeList'
+import _Resume from '../../Component/_Education';
 export default class ResumeView extends Component {
     constructor(props) {
         super(props)
@@ -21,6 +24,24 @@ export default class ResumeView extends Component {
             kjd:''
         }
     }
+
+    renderEducation=({item})=>{
+       return(
+           <_Resume
+           item={item}
+           education={true}
+           />
+       )
+    }
+    renderCertification=({item})=>{
+       return(
+           <_Resume
+           item={item}
+           education={false}
+           />
+       )
+    }
+
     goBack = () => {
 this.props.navigation.pop()
     }
@@ -28,6 +49,9 @@ this.props.navigation.pop()
         this.props.navigation.navigate("SlotsAvailable")
     }
     render() {
+        const Education = this.props.navigation.getParam('education')
+        const Certification = this.props.navigation.getParam('certification')
+        const hourlyRate = this.props.navigation.getParam('hourlyRate')
         return (
             <SafeAreaView style={styles.container}>
                 <_AppHeader
@@ -41,73 +65,30 @@ this.props.navigation.pop()
                 <View style={styles.content}>
                     <View style={styles.subContent}>
                         <Text style={[styles.headingText,{marginBottom:RFValue(5)}]}>Education</Text>
-                        <_TextInput
-                            squarInput={true}
-                            placeholderTextColor={lightGrey}
-                            inputBox={styles.inputStyle}
-                            placeholder={'1984-1989'}
-                            onChangeText={(value) => this.setState({ education: value })}
-                        />
-                <Text style={[styles.headingText,{marginBottom:RFValue(5),marginTop:RFValue(10)}]}>MIT</Text>
-                        <_TextInput
-                            squarInput={true}
-                            placeholderTextColor={lightGrey}
-                            inputBox={styles.inputStyle}
-                            placeholder={'EE'}
-                            onChangeText={(value) => this.setState({ mit: value })}
-                        />
-                
-                    <Text style={[styles.headingText,{marginBottom:RFValue(5),marginTop:RFValue(10)}]}>Certifications</Text>
-                        <_TextInput
-                            squarInput={true}
-                            placeholderTextColor={lightGrey}
-                            inputBox={styles.inputStyle}
-                            placeholder={'1984-1989'}
-                            onChangeText={(value) => this.setState({ certification: value })}
-                        />
-                         <Text style={[styles.headingText,{marginBottom:RFValue(5),marginTop:RFValue(10)}]}>tefi</Text>
-                        <_TextInput
-                            squarInput={true}
-                            placeholderTextColor={lightGrey}
-                            inputBox={styles.inputStyle}
-                            placeholder={'TEFL diploma'}
-                            onChangeText={(value) => this.setState({ tef1: value })}
-                        />
-                         <_TextInput
-                            squarInput={true}
-                            placeholderTextColor={lightGrey}
-                            inputBox={[styles.inputStyle,{marginTop:RFValue(15)}]}
-                            placeholder={'1984-1989'}
-                            onChangeText={(value) => this.setState({ tef2: value })}
-                        />
-                  <Text style={[styles.headingText,{marginBottom:RFValue(5),marginTop:RFValue(10)}]}>tefi</Text>
-                        <_TextInput
-                            squarInput={true}
-                            placeholderTextColor={lightGrey}
-                            inputBox={styles.inputStyle}
-                            placeholder={'TEFL diploma'}
-                            onChangeText={(value) => this.setState({ tef3: value })}
-                        />
-                         <_TextInput
-                            squarInput={true}
-                            placeholderTextColor={lightGrey}
-                            inputBox={[styles.inputStyle,{marginTop:RFValue(15)}]}
-                            placeholder={'1984-1989'}
-                            onChangeText={(value) => this.setState({ tef4: value })}
-                        />
-                 <Text style={[styles.headingText,{marginBottom:RFValue(5),marginTop:RFValue(10)}]}>kjd</Text>
-                 <_TextInput
-                            squarInput={true}
-                            placeholderTextColor={lightGrey}
-                            inputBox={styles.inputStyle}
-                            placeholder={'TEFL diploma'}
-                            onChangeText={(value) => this.setState({ kjd: value })}
-                        />
+                        <FlatList
+                       
+                        extraData={Education}
+                        data={Education}
+                        keyExtractor={(item) => { item.id }}
+                        renderItem={this.renderEducation}
+                        showsVerticalScrollIndicator={false}
+                    />
+                    </View>
+                    <View style={[styles.subContent,{marginTop:10}]}>
+                     <Text style={[styles.headingText,{marginBottom:RFValue(5)}]}>Certification</Text>
+                        <FlatList
+                        extraData={Certification}
+                        data={Certification}
+                        keyExtractor={(item) => { item.id }}
+                        renderItem={this.renderCertification}
+                        showsVerticalScrollIndicator={false}
+                    />
                     </View>
                 </View>
                 <_BottomStaticButton
                     perHourPriceText={{ color: White }}
                     BookLesson={() => this._bookLesson()}
+                    perHour={hourlyRate}
                 />
             </SafeAreaView>
         )

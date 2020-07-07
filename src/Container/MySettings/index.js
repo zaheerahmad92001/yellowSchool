@@ -229,7 +229,10 @@ export  class MySettings extends Component {
                             navigation={this.props.navigation}
                             /> :
                             this.state.passwordClicked ?
-                                <PasswordSetting /> :
+                                <PasswordSetting 
+                                dialogbox={()=>this.dialogbox}
+                                navigation={this.props.navigation}
+                                /> :
                                 this.state.paymentMethodsClicked ?
                                     <PaymentMethods 
                                     navigation={this.props.navigation}

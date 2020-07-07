@@ -9,6 +9,7 @@ import Auth from '../../../Utils/modal/Auth';
 import { ValidateEmail } from '../../../RandomFun';
 import DialogBox from 'react-native-dialogbox';
 import { lightYellow, _Yellow } from '../../../Colors';
+import { Container, Content } from 'native-base';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
 export default class SignUp extends Component {
@@ -18,7 +19,8 @@ export default class SignUp extends Component {
             name: '',
             email: '',
             password: '',
-            loading: false
+            loading: false,
+            user_type:'student'
         }
     }
     _Done = () => {
@@ -28,25 +30,29 @@ export default class SignUp extends Component {
     Register = () => {
         const scope = this;
         
-        const { email, password, name } = this.state;
+        const { email, password, name,user_type } = this.state;
         if (email.trim().length > 0 && ValidateEmail(email.trim())) {
             if (password.trim().length > 0) {
                 if (name.trim().length >= 5) {
                     this.setState({ loading: true })
-                    Auth.register(email, password, name)
+                    Auth.register(email, password, name,user_type)
                         .then((res) => {
-                            if (res.success === false) {
+                             if (res.success === false) {
                                 console.log('success',res.success)
-                                scope.setState({loading:false})
                                 scope.dialogbox.tip({
                                     title: 'oh no !',
                                     content: res.error
                                 })
                             } else {
                                 scope.setState({loading:false})
+                                scope.setState({
+                                    email:'',
+                                    password:'',
+                                    name:''
+                                })
                                 ToastAndroid.show('User register successfully', ToastAndroid.SHORT)
+                                scope.props.navigation.navigate('Login')
                             }
-
                         }).catch((error) => {
                             scope.dialogbox.tip({
                                 title: 'oh no !',
@@ -88,13 +94,13 @@ export default class SignUp extends Component {
     render() {
         const { loading } = this.state;
         return (
-            <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <Container style={{ flex: 1, backgroundColor: 'white' }}>
                 <_AppHeader
                     leftText={'Done'}
                     headerText={'SIGN UP'}
                     leftPress={() => this._Done()}
                 />
-                <View style={styles.content}>
+                <Content style={styles.content}>
                     <Text style={styles.Heading}>Name</Text>
                     <View style={styles.textInputView}>
                         <_TextInput
@@ -133,9 +139,9 @@ export default class SignUp extends Component {
                                 onPress={() => this.Register()} />
                         }
                     </View>
-                </View>
+                </Content>
                 <DialogBox ref={dialogbox => { this.dialogbox = dialogbox }} />
-            </View>
+            </Container>
         )
     }
 }

@@ -15,13 +15,6 @@ import _BottomNavigation from '../../Component/bottomNavigation';
 import _AppHeader from '../../Component/AppHeader';
 import _BottomStaticButton from '../../Component/bottomStaticButton';
 import _AgeList from '../../Component/studentAgeList';
-const studenstLevel=[
-    {level:'Beginner'},
-    {level:'Preintermediate'},
-    {level:'Intermediate'},
-    {level:'Advance'},
-    {level:'Profiency'},
-]
 
 export default class LevelOfStudents extends Component {
     constructor(props){
@@ -31,6 +24,7 @@ export default class LevelOfStudents extends Component {
         }
     }
     renderLevelOfStudents=({item})=>{
+
         return(
             <_AgeList
             item={item}
@@ -45,6 +39,8 @@ _bookLesson=()=>{
  this.props.navigation.navigate("SlotsAvailable")
 }
     render() {
+        const  preferedStudentLevel = this.props.navigation.getParam('preferedStudentLevel')
+        const hourlyRate = this.props.navigation.getParam('hourlyRate')
         return (
             <SafeAreaView style={styles.container}>
                 <_AppHeader
@@ -57,7 +53,7 @@ _bookLesson=()=>{
                 />
                 <View style={styles.content}>
             <FlatList
-            data={studenstLevel}
+            data={preferedStudentLevel}
             keyExtractor={(item)=>item.key}
             renderItem={this.renderLevelOfStudents}
             />
@@ -65,6 +61,7 @@ _bookLesson=()=>{
                 <_BottomStaticButton
                 perHourPriceText={{color:White}}
                 BookLesson={()=>this._bookLesson()}
+                perHour={hourlyRate}
                 />
             </SafeAreaView>
         )

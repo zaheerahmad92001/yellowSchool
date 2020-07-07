@@ -1,15 +1,36 @@
 {
-    "register":{
-        "method":"POST",
-        "route":"/users"
+    "register": {
+        "method": "POST",
+        "route": "/users"
     },
-"login":{
-    "method":"POST",
-    "route":"/auth"
+    "login": {
+        "method": "POST",
+        "route": "/auth"
+    },
+    "accountDetail": {
+        "method": "PUT",
+        "route": "/users"
+    },
+    "changePassword": {
+        "method": "PUT",
+        "route": "/users/change-password "
+    },
+    "deleteAccount": {
+        "method": "DELETE",
+        "route": "/users"
+    },
+    "tutorList": {
+        "method": "GET",
+        "route": "/tutors"
+    },
+"tutorDetail":{
+    "method":"GET",
+    "route":"/tutors"
 },
-"accountDetail":{
-    "method":"PUT",
-    "route":"/users"
-}
 
+
+    "subjectsList": {
+        "method": "GET",
+        "route": "/subjects"
+    }
 }

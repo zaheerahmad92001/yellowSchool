@@ -17,17 +17,17 @@ import FromMessage from '../../Component/MessageComponent';
 import { TextInput } from 'react-native-gesture-handler';
 import { Container, Content, Icon } from 'native-base';
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
-const messages=[
-    {to:'Yes i am ok with it begin',time:'10:47'},
-    {from:'hi! How are you',time:'10:47'},
-    {to:'Yes i am ok with it begin',time:'10:47'},
-    {from:'hi! How are you',time:'10:47'},
-    {to:'Yes i am ok with it begin',time:'10:47'},
-    {from:'hi! How are you',time:'10:47'},
-    {to:'Yes i am ok with it begin',time:'10:47'},
-    {from:'hi! How are you',time:'10:47'},
-    {to:'Yes i am ok with it begin',time:'12:47'},
-    {from:'hi! How are you',time:'12:47'},
+const messages = [
+    { to: 'Yes i am ok with it begin', time: '10:47' },
+    { from: 'hi! How are you', time: '10:47' },
+    { to: 'Yes i am ok with it begin', time: '10:47' },
+    { from: 'hi! How are you', time: '10:47' },
+    { to: 'Yes i am ok with it begin', time: '10:47' },
+    { from: 'hi! How are you', time: '10:47' },
+    { to: 'Yes i am ok with it begin', time: '10:47' },
+    { from: 'hi! How are you', time: '10:47' },
+    { to: 'Yes i am ok with it begin', time: '12:47' },
+    { from: 'hi! How are you', time: '12:47' },
 ]
 export default class MessageView extends Component {
     constructor(props) {
@@ -35,46 +35,47 @@ export default class MessageView extends Component {
         this.state = {
             message: '',
             showMessage: true,
+
         }
     }
     componentDidMount() {
-  this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', 
-    this._keyboardDidShow.bind(this));
-}
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
+    }
 
 
-componentWillUnmount() {
-  this.keyboardDidShowListener.remove();
-  //this.keyboardDidHideListener.remove();
-}
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+    }
 
-_keyboardDidShow() {
-  this.scrollView.scrollToEnd({ animated: false })
-}
+    _keyboardDidShow(e) {
+        this.scrollView.scrollToEnd({ animated: false })
+    }
+
     goBack = () => {
         this.props.navigation.pop()
     }
     _bookLesson = () => {
-this.props.navigation.navigate('SlotsAvailable')
+        this.props.navigation.navigate('SlotsAvailable')
     }
     _sendMessage = () => {
 
     }
-    renderMessages=({item})=>{
-       return( <FromMessage
-        item={item}
+    renderMessages = ({ item }) => {
+        return (<FromMessage
+            item={item}
         />
-       )}
+        )
+    }
     render() {
         return (
             Platform.OS === 'android' ?
-                <Container style={styles.container}>
+                <Container style={[styles.container]}>
                     <_AppHeader
                         leftIcon={'keyboard-arrow-left'}
                         leftIconStyle={{ color: White }}
                         leftText={'Back'}
                         headerText={'Meht T.'}
-                        leftIconPress={()=>this.goBack()}
+                        leftIconPress={() => this.goBack()}
                         leftPress={() => this.goBack()}
                         rightText={'Book lesson'}
                         rightPress={() => this._bookLesson()}
@@ -82,16 +83,17 @@ this.props.navigation.navigate('SlotsAvailable')
                     />
 
                     <ScrollView
-                     ref={ref => {this.scrollView = ref}}
-                     onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}
+
+                        ref={ref => { this.scrollView = ref }}
+                        onContentSizeChange={() => this.scrollView.scrollToEnd({ animated: true })}
                     >
-                      
-                           <FlatList
-                           data={messages}
-                           keyExtractor={(item)=>item.key}
-                           renderItem={this.renderMessages}
-                           />
-                        
+
+                        <FlatList
+                            data={messages}
+                            keyExtractor={(item) => item.key}
+                            renderItem={this.renderMessages}
+                        />
+
                     </ScrollView>
                     <View style={{ justifyContent: 'flex-end', height: screenHeight * 0.1 }}>
                         <View style={styles.messageBox}>
@@ -132,7 +134,7 @@ this.props.navigation.navigate('SlotsAvailable')
                         leftIconStyle={{ color: White }}
                         leftText={'Back'}
                         headerText={'Meht T.'}
-                        leftIconPress={()=>this.goBack()}
+                        leftIconPress={() => this.goBack()}
                         leftPress={() => this.goBack()}
                         rightText={'Book lesson'}
                         rightPress={() => this._bookLesson()}
@@ -140,17 +142,17 @@ this.props.navigation.navigate('SlotsAvailable')
                     />
 
                     <ScrollView style={styles.container}
-                    keyboardShouldPersistTaps='always'
-                    ref={ref => {this.scrollView = ref}}
-                    onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}
+                        keyboardShouldPersistTaps='always'
+                        ref={ref => { this.scrollView = ref }}
+                        onContentSizeChange={() => this.scrollView.scrollToEnd({ animated: true })}
                     >
 
                         <FlatList
-                           data={messages}
-                           keyExtractor={(item)=>item.key}
-                           renderItem={this.renderMessages}
-                           />
-                       
+                            data={messages}
+                            keyExtractor={(item) => item.key}
+                            renderItem={this.renderMessages}
+                        />
+
                     </ScrollView>
                     <View style={{ justifyContent: 'flex-end', height: screenHeight * 0.1 }}>
                         <View style={styles.messageBox}>

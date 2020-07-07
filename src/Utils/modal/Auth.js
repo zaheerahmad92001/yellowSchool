@@ -6,7 +6,7 @@ export default class Auth extends Component{
         return requestHandler('register',{
             email:email,
             password:password,
-            name:name
+            name:name,
         })
     };
     static login(email,password){
